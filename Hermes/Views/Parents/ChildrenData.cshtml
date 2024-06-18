@@ -1,0 +1,142 @@
+﻿@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Στοιχεία παιδιών";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+}
+
+<style>
+    /* Thin gray border */
+    hr.thin {
+        border-top: 1px solid #909090;
+    }
+</style>
+
+@Html.AntiForgeryToken()
+<div class="row" style="margin:5px 5px 0px 5px; margin-top:20px">
+    <div style="margin:5px 20px 5px 20px">
+        <span style="font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff;float:left">
+            <font style="color:#00008b;font-family:'Segoe UI'">Στοιχεία παιδιών για εγγραφή ή επανεγγραφή</font>
+        </span>
+        <span style="margin:0px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Parents", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+        <button class="btn btn-primary" style="margin:0px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+    </div>
+</div>
+
+<div class="row" style="margin:0px 20px 5px 20px">
+    <hr class="thin"/>
+    <div class="col-md-6">
+        <div class="col-md-4">
+            <label class="control-label">Επώνυμο πατέρα:</label>
+        </div>
+        <div class="col-md-3">
+            <label class="form-control smartShortText" style="min-height:20px;width:300px; background-color:#EEE"
+                   title="@Html.Raw(ViewBag.loggedParent.FATHER_LASTNAME)">@Html.Raw(ViewBag.loggedParent.FATHER_LASTNAME)</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="col-md-4">
+            <label class="control-label">Όνομα πατέρα:</label>
+        </div>
+        <div class="col-md-3">
+            <label class="form-control smartShortText" style="min-height:20px;width:300px; background-color:#EEE"
+                    title="@Html.Raw(ViewBag.loggedParent.FATHER_FIRSTNAME)">@Html.Raw(ViewBag.loggedParent.FATHER_FIRSTNAME)</label>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin:5px 20px 5px 20px">
+    <div class="col-md-6">
+        <div class="col-md-4">
+            <label class="control-label">Επώνυμο μητέρας:</label>
+        </div>
+        <div class="col-md-3">
+            <label class="form-control smartShortText" style="min-height:20px;width:300px; background-color:#EEE"
+                   title="@Html.Raw(ViewBag.loggedParent.MOTHER_LASTNAME)">@Html.Raw(ViewBag.loggedParent.MOTHER_LASTNAME)</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-4">
+                <label class="control-label">Όνομα μητέρας:</label>
+            </div>
+            <div class="col-md-3">
+                <label class="form-control smartShortText" style="min-height:20px;width:300px; background-color:#EEE"
+                       title="@Html.Raw(ViewBag.loggedParent.MOTHER_FIRSTNAME)">@Html.Raw(ViewBag.loggedParent.MOTHER_FIRSTNAME)</label>
+            </div>
+        </div>
+</div>
+
+<div class="body-content" style="margin:10px 20px 5px 20px">
+    @(Html.Kendo().Grid<ChildrenViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.AMKA).Width(20).Filterable(false);
+            columns.Bound(c => c.FIRSTNAME).Width(30).Filterable(false);
+            columns.Bound(c => c.LASTNAME).Width(40).Filterable(false);
+            columns.Bound(c => c.BIRTHDATE).Width(24).Filterable(false);
+            columns.ForeignKey(f => f.GENDER, (IEnumerable<SYS_GENDERS>)ViewData["genders"], "GENDER_ID", "GENDER").Width(20);
+            columns.ForeignKey(f => f.NATIONALITY, (IEnumerable<SYS_NATIONALITIES>)ViewData["nationalities"], "NATIONALITY_ID", "NATIONALITY_TEXT").Width(30);
+            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(36);
+        })
+        .ToolBar(toolBar =>
+        {
+            toolBar.Create();
+        })
+        .Editable(edit => edit.Mode(GridEditMode.PopUp).Window(w => w.Width(800).Title("Επεξεργασία")).TemplateName("ChildForm"))
+        .HtmlAttributes(new { style = "font-size:14px" })
+        .Events(e => e.Edit("onEdited"))
+        .Navigatable()
+        .Filterable()
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+        .Scrollable(scr => scr.Height(340))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(datasource => datasource
+        .Ajax()
+        .PageSize(20)
+        .ServerOperation(false)
+        .Model(model =>
+        {
+            model.Id(p => p.CHILD_ID);
+            model.Field(p => p.GENDER).DefaultValue(0);
+            model.Field(p => p.NATIONALITY).DefaultValue(0);
+        })
+        .Create(create => create.Action("Child_Create", "Parents"))
+        .Read(read => read.Action("Child_Read", "Parents"))
+        .Update(update => update.Action("Child_Update", "Parents"))
+        .Destroy(destroy => destroy.Action("Child_Destroy", "Parents"))
+        .Events(events => events.Error("error_handler"))
+        ) @* datasource*@
+    )
+</div>
+
+<script type="text/javascript">
+
+    function onEdited(e) {
+        e.container.data().kendoWindow.bind("deactivate", function () { RefreshGrid(e); });
+    }
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        $("#Grid").data("kendoGrid").dataSource.read();
+    }
+
+</script>

@@ -1,0 +1,95 @@
+﻿@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Δηλώσεις γονέων";
+    Layout = "~/Views/Shared/_StationLayout.cshtml";
+    string schoolYear = ViewData["schoolYearText"].ToString();
+    string protocol = ViewData["prosklisiProtocol"].ToString();
+    string displayInfo = schoolYear + ": " + protocol;       
+}
+
+@Html.AntiForgeryToken()
+<div class="row" style="margin:5px 30px 5px 30px; margin-top:10px">
+    @*<span style="margin:5px 30px 5px 30px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">Μητρώο δηλώσεων στοιχείων γονέων</font>
+    </span>*@
+    <span style="margin:5px 30px 5px 30px">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">
+            @Html.Label("", "Μητρώο δηλώσεων στοιχείων γονέων. Πρόσκληση  " + displayInfo, new { @style = "font-size:15px;font-style:normal" })
+        </font>
+    </span>
+    <span style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Station", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+    <button class="btn btn-info" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+</div>
+
+<div class="body-content" style="margin:10px 30px 5px 30px;font-size:small">
+    @(Html.Kendo().Grid<sqlStatementGridViewModel>()
+        .Name("Master")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.MOTHER_FULLNAME).Width(40);
+            columns.Bound(c => c.FATHER_FULLNAME).Width(40);
+            columns.ForeignKey(f => f.MOTHER_JOBSECTOR, (IEnumerable<JOB_SECTORS>)ViewData["job_sectors"], "JOBSECTOR_ID", "JOBSECTOR_TEXT").Width(25);
+            columns.ForeignKey(f => f.FATHER_JOBSECTOR, (IEnumerable<JOB_SECTORS>)ViewData["job_sectors"], "JOBSECTOR_ID", "JOBSECTOR_TEXT").Width(25);
+            columns.Bound(c => c.STATEMENT_DATE).Width(20);
+            columns.Template(
+                @<text></text>)
+            .ClientTemplate(
+            "<a class=\"k-button k-button-icontext\" href='" + Url.Action("StatementEdit", "Station") + "?statementId=#=STATEMENT_ID#' target = _blank><span class=\"k-icon k-edit\"></span>Καρτέλα</a>"
+            ).Width(15);
+            columns.Template(
+                @<text></text>)
+            .ClientTemplate(
+            "<a class=\"k-button k-button-icontext\" href='" + Url.Action("StatementPrint", "Station") + "?statementId=#=STATEMENT_ID#' target = _blank><span class=\"k-icon k-justifyFull\"></span>Εκτύπωση</a>"
+            ).Width(15);
+        })
+            .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(10))
+            .Selectable()
+            .Filterable()
+            .HtmlAttributes(new { style = "display: block;font-size:12px" })
+            .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+            .Scrollable(scr => scr.Height(420))
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(60)
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(p => p.PARENTS_ID);
+            })
+            .Read(read => read.Action("StationStatements_Read", "Station"))
+            .Events(events => events.Error("error_handler"))
+            )
+    )
+</div>
+
+<script type="text/javascript">
+
+    var options = null;
+
+    function RefreshGrid(e) {
+        var grid = $("#Master").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        $("#Master").data("kendoGrid").dataSource.read();
+    }
+
+</script>
+

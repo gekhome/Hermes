@@ -1,0 +1,108 @@
+﻿@using Hermes.Models
+@model IEnumerable<Hermes.Models.UserAdminViewModel>
+
+@{
+    ViewBag.Title = "Λογαριασμοί διαχειριστών";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="page-header" style="margin:5px 60px 5px 60px">
+    <span style="margin:5px 60px 5px 60px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">Λογαριασμών διαχειριστών</font>
+    </span>
+    <span style="margin:5px 10px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Admin", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+    <button class="btn btn-info" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+</div>
+<div class="body-content" style="margin:10px 60px 5px 60px">
+    @(Html.Kendo().Grid<UserAdminViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.USERNAME).Width(40);
+            columns.Bound(c => c.PASSWORD).Width(34);
+            columns.Bound(c => c.FULLNAME).Width(60);
+            columns.Bound(c => c.ISACTIVE).Width(22).ClientTemplate("<input type='checkbox' #= ISACTIVE ? checked='checked':'' # class='chkbx' />");
+            columns.Bound(c => c.CREATEDATE).Width(30).Format("{0:dd/MM/yyyy}");
+            columns.Command(command => command.Destroy()).Width(30);
+        })
+        .ToolBar(toolBar =>
+        {
+            toolBar.Create();
+            toolBar.Save();
+        })
+        .HtmlAttributes(new { style = "font-size:14px" })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Filterable()
+        .Navigatable()
+        .Scrollable(scr => scr.Height(380))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(datasource => datasource
+            .Ajax()
+            .Batch(true)
+            .PageSize(20)
+            .ServerOperation(false)
+            .Model(model => model.Id(p => p.USER_ID))
+            .Create(create => create.Action("Admin_Create", "USER_ADMINS"))
+            .Read(read => read.Action("Admin_Read", "USER_ADMINS"))
+            .Update(update => update.Action("Admin_Update", "USER_ADMINS"))
+            .Destroy(destroy => destroy.Action("Admin_Destroy", "USER_ADMINS"))
+            .Events(events => events.Error("error_handler"))
+        )
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+    )
+</div>
+
+<script type="text/javascript">
+
+    // Date: 16-11-2018
+    // Listener for the state of the three checkboxes (Π1, Π2, Π3).
+    // Required, otherwise changes do not take effect in batch mode of the grid.
+    // THIS IS IT! It works for any number of checkbox columns. All other solutions fail!
+    // in batch editing mode of the grid.
+    // Solution link: https://stackoverflow.com/questions/17889049/adding-bindeable-checkbox-column-to-grid
+    $(function () {
+        $('#Grid').on('click', '.chkbx', function () {
+            var checked = $(this).is(':checked');
+            var grid = $('#Grid').data().kendoGrid;
+
+            grid.closeCell();
+            var dataItem = grid.dataItem($(this).closest('tr'));
+            var col = $(this).closest('td');
+
+            grid.editCell(col);
+            dataItem.set(grid.columns[col.index()].field, checked);
+            grid.closeCell(col);
+        });
+    });
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        RefreshGrid(e);
+    }
+
+</script>
+
+
+
+
+
+

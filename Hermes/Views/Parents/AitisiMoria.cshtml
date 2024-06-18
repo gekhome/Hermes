@@ -1,0 +1,259 @@
+﻿@model Hermes.Models.AitisiCheckViewModel
+@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Αξιολόγηση άιτησης";
+    Layout = "~/Views/Shared/_LayoutMin.cshtml";
+}
+
+<link href="@Url.Content("~/Content/mvcNotify.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/mvcNotify.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    //Set autoclear of messages. Don't put this into $(document).ready.
+    //mvcNotify.autoClearTimeout = 0; //don't autoclear any types
+    mvcNotify.autoClearTimeout = 10000; //Unit of milliseconds. Requires mvcNotify.typesToAutoClear to be set to something (default behavior).
+    mvcNotify.typesToConsoleLog = "all"; //Log all types to console.
+</script>
+
+<style>
+    /* Thin gray border */
+    hr.thin {
+        border-top: 1px solid #909090;
+    }
+    div.emphasis * {
+        color: #C0392B;
+    }
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        .k-textbox {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+        .k-textbox:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="page-header" style="margin:5px 60px 5px 60px">
+    </div>
+    <div class="container body-content">
+        <table class="col-md-12" style="border:solid;border-width:thin;margin:20px 40px 20px 20px">
+            <tr>
+                <th style="background-color:#1D7CAE;padding-left:20px;padding-top:2px;padding-bottom:4px;margin-top:2px;margin-bottom:2px">
+                    <font style="font-family:'Segoe UI';font-size:large;color:white;">Αξιολόγηση αίτησης (προβολή)</font>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <span style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+                        <a class="btn btn-warning" style="font-family:'Segoe UI';font-size:14px" href="#" onclick="javascript:window.close();opener.window.focus();">Κλείσιμο καρτέλας</a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label">ΑΜΚΑ παιδιού:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-control smartShortText" style="min-height:28px;width:300px; background-color:#EEE"
+                                        title="@Html.Raw(ViewBag.childInfo.AMKA)">@Html.Raw(ViewBag.childInfo.AMKA)</label>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <label class="control-label">Ονοματεπώνυμο:</label>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-control smartShortText" style="min-height:28px;width:300px; background-color:#EEE"
+                                        title="@Html.Raw(ViewBag.childInfo.FULLNAME)">@Html.Raw(ViewBag.childInfo.FULLNAME)</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="thin" />
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_SOCIAL, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_SOCIAL">@Model.MORIA_SOCIAL</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_OAED, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_OAED">@Model.MORIA_OAED</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_INCOME, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_INCOME">@Model.MORIA_INCOME</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_FAMILY, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_FAMILY">@Model.MORIA_FAMILY</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_REREGISTER, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_REREGISTER">@Model.MORIA_REREGISTER</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11" style="margin-bottom:5px">
+                        @Html.LabelFor(model => model.MORIA_SIBLING, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE"
+                                title="@Model.MORIA_SIBLING">@Model.MORIA_SIBLING</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="col-md-11 emphasis" style="margin-bottom:5px;">
+                        @Html.LabelFor(model => model.MORIA_TOTAL, new { @class = "control-label col-md-4" })
+                        <label class="form-control smartShortText" style="min-height:28px;width:120px; background-color:#EEE;"
+                                title="@Model.MORIA_TOTAL">@Model.MORIA_TOTAL</label>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <div class="col-md-11" style="margin-bottom:5px">
+                            @Html.LabelFor(model => model.AGE_CATEGORY, new { @class = "control-label col-md-4" })
+                            @(Html.Kendo().DropDownListFor(model => model.AGE_CATEGORY)
+                            .Name("AGE_CATEGORY")
+                            .DataTextField("CATEGORY_TEXT")
+                            .DataValueField("CATEGORY_ID")
+                            .OptionLabel("Επιλογή...")
+                            .HtmlAttributes(new { style = "width:250px;" })
+                            .AutoBind(true)
+                            .DataSource(source => { source.Read(read => { read.Action("GetAgeClasses", "Station"); }).ServerFiltering(true); })
+                            )
+                            @Html.ValidationMessageFor(model => model.AGE_CATEGORY, "", new { @class = "text-danger" })
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <fieldset>
+                        <div class="col-md-11" style="margin-bottom:20px">
+                            @Html.LabelFor(model => model.RANKING, new { @class = "control-label col-md-4" })
+                            @(Html.Kendo().DropDownListFor(model => model.RANKING)
+                            .Name("RANKING")
+                            .DataTextField("RANKING_TEXT")
+                            .DataValueField("RANKING_ID")
+                            .OptionLabel("Επιλογή...")
+                            .HtmlAttributes(new { style = "width:250px;" })
+                            .AutoBind(true)
+                            .DataSource(source => { source.Read(read => { read.Action("GetRankings", "Station"); }).ServerFiltering(true); })
+                            )
+                            @Html.ValidationMessageFor(model => model.RANKING, "", new { @class = "text-danger" })
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container body-content">
+        <table class="col-md-12" style="border:solid;border-width:thin;margin:5px 40px 5px 20px">
+            <tr>
+                <td>
+                    @(Html.Kendo().PanelBar()
+                    .Name("Epitropes")
+                    .Items(items =>
+                    {
+                        items.Add()
+                        .Text("Επιτροπές - Ενστάσεις και κείμενα επιτροπών")
+                        .Selected(false)
+                        .Expanded(false)
+                        .Content(
+                        @<text>
+                            <div class="col-md-11" style="margin-bottom:5px;margin-top:10px">
+                                @Html.LabelFor(model => model.ENSTASI, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.ENSTASI, new { htmlAttributes = new { @class = "form-control", style = "max-width:20px;max-height:20px" } })
+                                @Html.ValidationMessageFor(model => model.ENSTASI, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px">
+                                @Html.LabelFor(model => model.APOKLEISMOS_AITIA, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.APOKLEISMOS_AITIA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.APOKLEISMOS_AITIA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px">
+                                @Html.LabelFor(model => model.EPITROPI1_TEXT, new { @class = "control-label col-md-3" })
+                                @Html.TextAreaFor(model => model.EPITROPI1_TEXT, 6, 80, new { @style = "width:600px" })
+                                @Html.ValidationMessageFor(model => model.EPITROPI1_TEXT, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px">
+                                @Html.LabelFor(model => model.EPITROPI2_TEXT, new { @class = "control-label col-md-3" })
+                                @Html.TextAreaFor(model => model.EPITROPI2_TEXT, 6, 80, new { @style = "width:600px" })
+                                @Html.ValidationMessageFor(model => model.EPITROPI2_TEXT, "", new { @class = "text-danger" })
+                            </div>
+                        </text>);
+                    })
+                    )
+                </td>
+            </tr>
+        </table>
+    </div>
+
+}   @* ---  End of BeginForm ----------*@
+
+

@@ -1,0 +1,2618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HermesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AGE_CLASSES">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY_TEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="AGE_START" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AGE_END" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="AITISIS">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_DATE" Type="date" />
+          <Property Name="AITISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="CHILD_ID" Type="int" />
+          <Property Name="TIMESTAMP" Type="datetime" />
+          <Property Name="AGE" Type="decimal" Precision="10" Scale="3" />
+          <Property Name="AGE_CATEGORY" Type="int" />
+          <Property Name="RE_REGISTRATION" Type="bit" />
+          <Property Name="MORIA_SOCIAL" Type="int" />
+          <Property Name="MORIA_OAED" Type="int" />
+          <Property Name="MORIA_INCOME" Type="int" />
+          <Property Name="MORIA_FAMILY" Type="int" />
+          <Property Name="MORIA_REREGISTER" Type="int" />
+          <Property Name="MORIA_SIBLING" Type="int" />
+          <Property Name="MORIA_TOTAL" Type="int" />
+          <Property Name="RANKING" Type="int" />
+          <Property Name="ENSTASI" Type="bit" />
+          <Property Name="APOKLEISMOS_AITIA" Type="nvarchar" MaxLength="255" />
+          <Property Name="EPITROPI1_TEXT" Type="nvarchar(max)" />
+          <Property Name="EPITROPI2_TEXT" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="APP_STATUS">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS_VALUE" Type="bit" />
+          <Property Name="LOCAL_TEST" Type="bit" />
+          <Property Name="STATUS_MESSAGE" Type="nvarchar" MaxLength="255" />
+          <Property Name="PARENT_ENABLE" Type="bit" />
+        </EntityType>
+        <EntityType Name="CHILDREN">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FIRSTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="LASTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="BIRTHDATE" Type="date" />
+          <Property Name="GENDER" Type="int" />
+          <Property Name="NATIONALITY" Type="int" />
+          <Property Name="PARENTS_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="FAMILY_INCOME">
+          <Key>
+            <PropertyRef Name="INCOME_ID" />
+          </Key>
+          <Property Name="INCOME_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INCOME_TEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="INCOME_MORIA" Type="int" />
+        </EntityType>
+        <EntityType Name="FAMILY_STATUS">
+          <Key>
+            <PropertyRef Name="FSTATUS_ID" />
+          </Key>
+          <Property Name="FSTATUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FSTATUS_TEXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="JOB_SECTORS">
+          <Key>
+            <PropertyRef Name="JOBSECTOR_ID" />
+          </Key>
+          <Property Name="JOBSECTOR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JOBSECTOR_TEXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NUMBERS">
+          <Key>
+            <PropertyRef Name="NUMBER_ID" />
+          </Key>
+          <Property Name="NUMBER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NUMBER" Type="int" />
+        </EntityType>
+        <EntityType Name="PARENT_TYPES">
+          <Key>
+            <PropertyRef Name="PARENT_TYPEID" />
+          </Key>
+          <Property Name="PARENT_TYPEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PARENT_TYPETEXT" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="PARENTS">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FATHER_FIRSTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="FATHER_LASTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="MOTHER_FIRSTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="MOTHER_LASTNAME" Type="nvarchar" MaxLength="100" />
+          <Property Name="FATHER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="MOTHER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="FATHER_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_ADT" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_ADT" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PASSPORT" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PASSPORT" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="MOTHER_ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="FATHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="MOTHER_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="FATHER_PERMIT" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PERMIT" Type="nvarchar" MaxLength="50" />
+          <Property Name="FAMILY_STATUS" Type="int" />
+          <Property Name="CHILD_EPIMELEIA" Type="int" />
+          <Property Name="PARENT_USERID" Type="int" />
+        </EntityType>
+        <EntityType Name="PROSKLISIS">
+          <Key>
+            <PropertyRef Name="PROSKLISI_ID" />
+          </Key>
+          <Property Name="PROSKLISI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCHOOL_YEAR" Type="int" />
+          <Property Name="DATE_START" Type="date" />
+          <Property Name="DATE_END" Type="date" />
+          <Property Name="HOUR_START" Type="nvarchar" MaxLength="20" />
+          <Property Name="HOUR_END" Type="nvarchar" MaxLength="20" />
+          <Property Name="DIOIKITIS" Type="nvarchar" MaxLength="100" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="ACTIVE" Type="bit" />
+          <Property Name="USERVIEW" Type="bit" />
+        </EntityType>
+        <EntityType Name="PROSKLISIS_STATUS">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="RANKINGS">
+          <Key>
+            <PropertyRef Name="RANKING_ID" />
+          </Key>
+          <Property Name="RANKING_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RANKING_TEXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="STATEMENTS">
+          <Key>
+            <PropertyRef Name="STATEMENT_ID" />
+          </Key>
+          <Property Name="STATEMENT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATEMENT_DATE" Type="date" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="FATHER_JOBSECTOR" Type="int" />
+          <Property Name="FATHER_AMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_DELTIOANERGIA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_EPIDOMA" Type="int" />
+          <Property Name="MOTHER_JOBSECTOR" Type="int" />
+          <Property Name="MOTHER_AMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_DELTIOANERGIA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_EPIDOMA" Type="int" />
+          <Property Name="INCOME_CATEGORY" Type="int" />
+          <Property Name="INCOME_FAMILY" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="bit" />
+          <Property Name="FATHER_DISABILITY" Type="bit" />
+          <Property Name="MOTHER_DISABILITY" Type="bit" />
+          <Property Name="CHILD_AMEA" Type="bit" />
+          <Property Name="CHILD_ORPHAN" Type="bit" />
+          <Property Name="PARENT_DIVORCED" Type="bit" />
+          <Property Name="PARENT_INARMY" Type="bit" />
+          <Property Name="CHILDREN_MINOR" Type="int" />
+          <Property Name="RE_REGISTRATION" Type="bit" />
+          <Property Name="SIBLING_IN_BNS" Type="bit" />
+        </EntityType>
+        <EntityType Name="SUPPORT">
+          <Key>
+            <PropertyRef Name="SUPPORT_ID" />
+          </Key>
+          <Property Name="SUPPORT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUPPORT_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUPPORT_PHONE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_DIMOS">
+          <Key>
+            <PropertyRef Name="DIMOS_ID" />
+          </Key>
+          <Property Name="DIMOS_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DIMOS" Type="nvarchar" MaxLength="100" />
+          <Property Name="DIMOS_PERIFERIA" Type="int" />
+        </EntityType>
+        <EntityType Name="SYS_GENDERS">
+          <Key>
+            <PropertyRef Name="GENDER_ID" />
+          </Key>
+          <Property Name="GENDER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="SYS_NATIONALITIES">
+          <Key>
+            <PropertyRef Name="NATIONALITY_ID" />
+          </Key>
+          <Property Name="NATIONALITY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NATIONALITY_TEXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_PERIFERIAKES">
+          <Key>
+            <PropertyRef Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" />
+          </Key>
+          <Property Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ΕΠΩΝΥΜΙΑ_ΠΕΡΙΦΕΡΕΙΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΠΕΡΙΦ_ΣΥΝΤΟΜΟΓΡΑΦΙΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΕΔΡΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΤΜΗΜΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΤΗΛΕΦΩΝΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="FAX" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SYS_PERIFERIES">
+          <Key>
+            <PropertyRef Name="PERIFERIA_ID" />
+          </Key>
+          <Property Name="PERIFERIA_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PERIFERIA_NAME" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SYS_SCHOOLYEARS">
+          <Key>
+            <PropertyRef Name="SY_ID" />
+          </Key>
+          <Property Name="SY_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SY_TEXT" Type="nvarchar" MaxLength="9" />
+          <Property Name="SY_DATESTART" Type="date" />
+          <Property Name="SY_DATEEND" Type="date" />
+        </EntityType>
+        <EntityType Name="SYS_STATIONS">
+          <Key>
+            <PropertyRef Name="ΣΤΑΘΜΟΣ_ΚΩΔ" />
+          </Key>
+          <Property Name="ΣΤΑΘΜΟΣ_ΚΩΔ" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ΕΠΩΝΥΜΙΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΣΥΜΜΕΤΟΧΗ" Type="bit" />
+          <Property Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΓΡΑΜΜΑΤΕΙΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΤΗΛΕΦΩΝΑ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΦΑΞ" Type="nvarchar" MaxLength="255" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΠΕΡΙΦΕΡΕΙΑΚΗ" Type="int" />
+          <Property Name="ΠΕΡΙΦΕΡΕΙΑ" Type="int" />
+          <Property Name="ΥΠΕΥΘΥΝΟΣ" Type="nvarchar" MaxLength="255" />
+          <Property Name="ΥΠΕΥΘΥΝΟΣ_ΦΥΛΟ" Type="int" />
+          <Property Name="ΚΙΝΗΤΟ" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SYS_YESNO">
+          <Key>
+            <PropertyRef Name="YESNO_ID" />
+          </Key>
+          <Property Name="YESNO_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YESNO_TEXT" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="TAXISNET">
+          <Key>
+            <PropertyRef Name="TAXISNET_ID" />
+          </Key>
+          <Property Name="TAXISNET_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RANDOM_NUMBER" Type="int" />
+          <Property Name="TAXISNET_AFM" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="UPLOADS">
+          <Key>
+            <PropertyRef Name="UPLOAD_ID" />
+          </Key>
+          <Property Name="UPLOAD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_ID" Type="int" />
+          <Property Name="PARENT_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="UPLOAD_DATE" Type="date" />
+          <Property Name="UPLOAD_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPLOAD_SUMMARY" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="UPLOADS_FILES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="STATION_USER" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCHOOLYEAR_TEXT" Type="nvarchar" MaxLength="10" />
+          <Property Name="FILENAME" Type="nvarchar" MaxLength="120" />
+          <Property Name="EXTENSION" Type="nvarchar" MaxLength="10" />
+          <Property Name="UPLOAD_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="USER_ADMINS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="120" />
+          <Property Name="ISACTIVE" Type="bit" />
+          <Property Name="CREATEDATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USER_PARENTS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" />
+          <Property Name="USER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="PARENT_TYPE" Type="int" />
+          <Property Name="CREATEDATE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USER_STATIONS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="ISACTIVE" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.gridAITISEIS_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="gridAITISEIS_DATA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="AITISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="AITISI_DATE" Type="date" />
+          <Property Name="PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="SCHOOL_YEAR" Type="int" />
+          <Property Name="SY_TEXT" Type="nvarchar" MaxLength="9" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="BIRTHDATE" Type="date" />
+          <Property Name="AGE" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AGE_CATEGORY" Type="int" />
+          <Property Name="GENDER" Type="int" />
+          <Property Name="PARENTS_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.gridPARENT_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="gridPARENT_DATA">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FATHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="MOTHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="FATHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.gridSTATEMENT_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="gridSTATEMENT_DATA">
+          <Key>
+            <PropertyRef Name="STATEMENT_ID" />
+          </Key>
+          <Property Name="STATEMENT_ID" Type="int" Nullable="false" />
+          <Property Name="STATEMENT_DATE" Type="date" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="SY_TEXT" Type="nvarchar" MaxLength="9" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="STATION_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="FATHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="MOTHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="FATHER_JOBSECTOR" Type="int" />
+          <Property Name="MOTHER_JOBSECTOR" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.gridUSER_PARENTS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="gridUSER_PARENTS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" />
+          <Property Name="USER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="PARENT_TYPE" Type="int" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="AITISI_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.mor_AITISI_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="mor_AITISI_DATA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+            <PropertyRef Name="CHILD_ID" />
+            <PropertyRef Name="WORKING_MOTHER" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="CHILD_ID" Type="int" Nullable="false" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="FATHER_JOBSECTOR" Type="int" />
+          <Property Name="MOTHER_JOBSECTOR" Type="int" />
+          <Property Name="FATHER_EPIDOMA" Type="bit" />
+          <Property Name="MOTHER_EPIDOMA" Type="bit" />
+          <Property Name="FAMILY_INCOME" Type="int" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="bit" />
+          <Property Name="FATHER_DISABILITY" Type="bit" />
+          <Property Name="MOTHER_DISABILITY" Type="bit" />
+          <Property Name="CHILD_AMEA" Type="bit" />
+          <Property Name="CHILD_ORPHAN" Type="bit" />
+          <Property Name="PARENT_DIVORCED" Type="bit" />
+          <Property Name="PARENT_INARMY" Type="bit" />
+          <Property Name="CHILDREN_NUMBER" Type="int" />
+          <Property Name="RE_REGISTRATION" Type="bit" />
+          <Property Name="SIBLING_IN_BNS" Type="bit" />
+          <Property Name="WORKING_MOTHER" Type="int" Nullable="false" />
+          <Property Name="PARENTS_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.mor_AITISI_MORIA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="mor_AITISI_MORIA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="PROSKLISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="AITISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="CHILD_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="CHILD_NAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="MORIA_SOCIAL" Type="int" />
+          <Property Name="MORIA_OAED" Type="int" />
+          <Property Name="MORIA_INCOME" Type="int" />
+          <Property Name="MORIA_FAMILY" Type="int" />
+          <Property Name="MORIA_REREGISTER" Type="int" />
+          <Property Name="MORIA_SIBLING" Type="int" />
+          <Property Name="MORIA_TOTAL" Type="int" />
+          <Property Name="RANKING" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.mor_CHILD_INFO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="mor_CHILD_INFO">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="int" Nullable="false" />
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.rep_AITISI_INFO_MORIA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="rep_AITISI_INFO_MORIA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+            <PropertyRef Name="AGE_CLASS_ID" />
+            <PropertyRef Name="WORKING_MOTHER" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="AITISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="AGE_CLASS_ID" Type="int" Nullable="false" />
+          <Property Name="AGE_CLASS" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_DISABILITY" Type="bit" />
+          <Property Name="MOTHER_DISABILITY" Type="bit" />
+          <Property Name="CHILD_AMEA" Type="bit" />
+          <Property Name="CHILD_ORPHAN" Type="bit" />
+          <Property Name="PARENT_DIVORCED" Type="bit" />
+          <Property Name="PARENT_INARMY" Type="bit" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="bit" />
+          <Property Name="INCOME_TEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="CHILDREN_NUMBER" Type="int" />
+          <Property Name="RE_REGISTRATION" Type="bit" />
+          <Property Name="SIBLING_IN_BNS" Type="bit" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="MORIA_SOCIAL" Type="int" />
+          <Property Name="MORIA_OAED" Type="int" />
+          <Property Name="MORIA_INCOME" Type="int" />
+          <Property Name="MORIA_FAMILY" Type="int" />
+          <Property Name="MORIA_REREGISTER" Type="int" />
+          <Property Name="MORIA_SIBLING" Type="int" />
+          <Property Name="MORIA_TOTAL" Type="int" />
+          <Property Name="WORKING_MOTHER" Type="int" Nullable="false" />
+          <Property Name="INCOME_AMOUNT" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="RANKING" Type="int" />
+          <Property Name="RANKING_TEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="APOKLEISMOS_AITIA" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlAITISEIS_LIST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlAITISEIS_LIST">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="int" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_DATE" Type="date" />
+          <Property Name="AITISI_PROTOCOL" Type="nvarchar" MaxLength="50" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="STATION_NAME" Type="nvarchar" MaxLength="255" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="CHILD_ID" Type="int" />
+          <Property Name="CHILD_FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="BIRTHDATE" Type="date" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+          <Property Name="AGE" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AGE_CATEGORY" Type="int" />
+          <Property Name="MORIA_TOTAL" Type="int" />
+          <Property Name="RANKING_TEXT" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlAPPLICANT_INFO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlAPPLICANT_INFO">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="PARENTS_ID" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="PARENT_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="PARENT_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="PARENT_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARENT_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARENT_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARENT_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlCHILD_SELECTOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlCHILD_SELECTOR">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="PARENTS_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlCHILDREN_DATA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlCHILDREN_DATA">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="int" Nullable="false" />
+          <Property Name="AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FIRSTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="LASTNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="BIRTHDATE" Type="date" />
+          <Property Name="GENDER" Type="int" />
+          <Property Name="NATIONALITY" Type="int" />
+          <Property Name="PARENTS_ID" Type="int" />
+          <Property Name="PARENT_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlCHILDREN_POPULATOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlCHILDREN_POPULATOR">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="int" Nullable="false" />
+          <Property Name="FULLNAME" Type="nvarchar" MaxLength="101" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlPARENT_INFO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlPARENT_INFO">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="int" Nullable="false" />
+          <Property Name="FATHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="MOTHER_FULLNAME" Type="nvarchar" MaxLength="201" />
+          <Property Name="FATHER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="FATHER_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="FATHER_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="FATHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="FATHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="MOTHER_AMKA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_ADDRESS" Type="nvarchar" MaxLength="255" />
+          <Property Name="MOTHER_EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="MOTHER_PHONEHOME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOTHER_PHONEWORK" Type="nvarchar" MaxLength="50" />
+          <Property Name="FSTATUS_TEXT" Type="nvarchar" MaxLength="50" />
+          <Property Name="PARENT_TYPETEXT" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlPARENT_SELECTOR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlPARENT_SELECTOR">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="int" Nullable="false" />
+          <Property Name="PARENT_FULLNAME" Type="nvarchar" MaxLength="201" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlUPLOADED_FILES' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlUPLOADED_FILES">
+          <Key>
+            <PropertyRef Name="FILE_ID" />
+          </Key>
+          <Property Name="FILE_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="int" />
+          <Property Name="AITISI_ID" Type="int" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="UPLOAD_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="UPLOAD_SUMMARY" Type="nvarchar" MaxLength="255" />
+          <Property Name="FILENAME" Type="nvarchar" MaxLength="120" />
+          <Property Name="EXTENSION" Type="nvarchar" MaxLength="10" />
+          <Property Name="STATION_USER" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCHOOLYEAR_TEXT" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlUSER_PARENT_SELECT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlUSER_PARENT_SELECT">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="USER_AFM" Type="nvarchar" MaxLength="10" />
+          <Property Name="PARENT_TYPETEXT" Type="nchar" MaxLength="20" />
+          <Property Name="CREATEDATE" Type="datetime" />
+          <Property Name="PARENT_FULLNAME" Type="nvarchar" MaxLength="201" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HermesDB.dbo.sqlUSER_STATION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="sqlUSER_STATION">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="20" />
+          <Property Name="STATION_ID" Type="int" />
+          <Property Name="ΕΠΩΝΥΜΙΑ" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_AITISIS_CHILDREN">
+          <End Role="CHILDREN" Type="Self.CHILDREN" Multiplicity="0..1" />
+          <End Role="AITISIS" Type="Self.AITISIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILDREN">
+              <PropertyRef Name="CHILD_ID" />
+            </Principal>
+            <Dependent Role="AITISIS">
+              <PropertyRef Name="CHILD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AITISIS_PARENTS1">
+          <End Role="PARENTS" Type="Self.PARENTS" Multiplicity="0..1" />
+          <End Role="AITISIS" Type="Self.AITISIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="AITISIS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CHILDREN_PARENTS1">
+          <End Role="PARENTS" Type="Self.PARENTS" Multiplicity="0..1" />
+          <End Role="CHILDREN" Type="Self.CHILDREN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="CHILDREN">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NEW_UPLOADS_FILES_NEW_UPLOADS">
+          <End Role="UPLOADS" Type="Self.UPLOADS" Multiplicity="0..1" />
+          <End Role="UPLOADS_FILES" Type="Self.UPLOADS_FILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UPLOADS">
+              <PropertyRef Name="UPLOAD_ID" />
+            </Principal>
+            <Dependent Role="UPLOADS_FILES">
+              <PropertyRef Name="UPLOAD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATEMENTS_PARENTS1">
+          <End Role="PARENTS" Type="Self.PARENTS" Multiplicity="0..1" />
+          <End Role="STATEMENTS" Type="Self.STATEMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="STATEMENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_DIMOS_SYS_PERIFERIES">
+          <End Role="SYS_PERIFERIES" Type="Self.SYS_PERIFERIES" Multiplicity="0..1" />
+          <End Role="SYS_DIMOS" Type="Self.SYS_DIMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PERIFERIES">
+              <PropertyRef Name="PERIFERIA_ID" />
+            </Principal>
+            <Dependent Role="SYS_DIMOS">
+              <PropertyRef Name="DIMOS_PERIFERIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SYS_STATIONS_SYS_PERIFERIAKES">
+          <End Role="SYS_PERIFERIAKES" Type="Self.SYS_PERIFERIAKES" Multiplicity="0..1" />
+          <End Role="SYS_STATIONS" Type="Self.SYS_STATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PERIFERIAKES">
+              <PropertyRef Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" />
+            </Principal>
+            <Dependent Role="SYS_STATIONS">
+              <PropertyRef Name="ΠΕΡΙΦΕΡΕΙΑΚΗ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HermesDBModelStoreContainer">
+          <EntitySet Name="AGE_CLASSES" EntityType="Self.AGE_CLASSES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AITISIS" EntityType="Self.AITISIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APP_STATUS" EntityType="Self.APP_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CHILDREN" EntityType="Self.CHILDREN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAMILY_INCOME" EntityType="Self.FAMILY_INCOME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAMILY_STATUS" EntityType="Self.FAMILY_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JOB_SECTORS" EntityType="Self.JOB_SECTORS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NUMBERS" EntityType="Self.NUMBERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARENT_TYPES" EntityType="Self.PARENT_TYPES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PARENTS" EntityType="Self.PARENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROSKLISIS" EntityType="Self.PROSKLISIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROSKLISIS_STATUS" EntityType="Self.PROSKLISIS_STATUS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RANKINGS" EntityType="Self.RANKINGS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATEMENTS" EntityType="Self.STATEMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SUPPORT" EntityType="Self.SUPPORT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_DIMOS" EntityType="Self.SYS_DIMOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_GENDERS" EntityType="Self.SYS_GENDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_NATIONALITIES" EntityType="Self.SYS_NATIONALITIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_PERIFERIAKES" EntityType="Self.SYS_PERIFERIAKES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_PERIFERIES" EntityType="Self.SYS_PERIFERIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_SCHOOLYEARS" EntityType="Self.SYS_SCHOOLYEARS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_STATIONS" EntityType="Self.SYS_STATIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SYS_YESNO" EntityType="Self.SYS_YESNO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAXISNET" EntityType="Self.TAXISNET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UPLOADS" EntityType="Self.UPLOADS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UPLOADS_FILES" EntityType="Self.UPLOADS_FILES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_ADMINS" EntityType="Self.USER_ADMINS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_PARENTS" EntityType="Self.USER_PARENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_STATIONS" EntityType="Self.USER_STATIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="gridAITISEIS_DATA" EntityType="Self.gridAITISEIS_DATA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gridAITISEIS_DATA].[AITISI_ID] AS [AITISI_ID], 
+    [gridAITISEIS_DATA].[AITISI_PROTOCOL] AS [AITISI_PROTOCOL], 
+    [gridAITISEIS_DATA].[AITISI_DATE] AS [AITISI_DATE], 
+    [gridAITISEIS_DATA].[PROTOCOL] AS [PROTOCOL], 
+    [gridAITISEIS_DATA].[STATION_ID] AS [STATION_ID], 
+    [gridAITISEIS_DATA].[SCHOOL_YEAR] AS [SCHOOL_YEAR], 
+    [gridAITISEIS_DATA].[SY_TEXT] AS [SY_TEXT], 
+    [gridAITISEIS_DATA].[FULLNAME] AS [FULLNAME], 
+    [gridAITISEIS_DATA].[BIRTHDATE] AS [BIRTHDATE], 
+    [gridAITISEIS_DATA].[AGE] AS [AGE], 
+    [gridAITISEIS_DATA].[AGE_CATEGORY] AS [AGE_CATEGORY], 
+    [gridAITISEIS_DATA].[GENDER] AS [GENDER], 
+    [gridAITISEIS_DATA].[PARENTS_ID] AS [PARENTS_ID]
+    FROM [dbo].[gridAITISEIS_DATA] AS [gridAITISEIS_DATA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="gridPARENT_DATA" EntityType="Self.gridPARENT_DATA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gridPARENT_DATA].[PARENTS_ID] AS [PARENTS_ID], 
+    [gridPARENT_DATA].[FATHER_FULLNAME] AS [FATHER_FULLNAME], 
+    [gridPARENT_DATA].[MOTHER_FULLNAME] AS [MOTHER_FULLNAME], 
+    [gridPARENT_DATA].[FATHER_PHONEHOME] AS [FATHER_PHONEHOME], 
+    [gridPARENT_DATA].[FATHER_PHONEWORK] AS [FATHER_PHONEWORK], 
+    [gridPARENT_DATA].[FATHER_PHONEMOBILE] AS [FATHER_PHONEMOBILE], 
+    [gridPARENT_DATA].[MOTHER_PHONEHOME] AS [MOTHER_PHONEHOME], 
+    [gridPARENT_DATA].[MOTHER_PHONEWORK] AS [MOTHER_PHONEWORK], 
+    [gridPARENT_DATA].[MOTHER_PHONEMOBILE] AS [MOTHER_PHONEMOBILE], 
+    [gridPARENT_DATA].[STATION_ID] AS [STATION_ID], 
+    [gridPARENT_DATA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [gridPARENT_DATA].[AITISI_ID] AS [AITISI_ID]
+    FROM [dbo].[gridPARENT_DATA] AS [gridPARENT_DATA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="gridSTATEMENT_DATA" EntityType="Self.gridSTATEMENT_DATA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gridSTATEMENT_DATA].[STATEMENT_ID] AS [STATEMENT_ID], 
+    [gridSTATEMENT_DATA].[STATEMENT_DATE] AS [STATEMENT_DATE], 
+    [gridSTATEMENT_DATA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [gridSTATEMENT_DATA].[PROTOCOL] AS [PROTOCOL], 
+    [gridSTATEMENT_DATA].[SY_TEXT] AS [SY_TEXT], 
+    [gridSTATEMENT_DATA].[PARENTS_ID] AS [PARENTS_ID], 
+    [gridSTATEMENT_DATA].[STATION_ID] AS [STATION_ID], 
+    [gridSTATEMENT_DATA].[STATION_NAME] AS [STATION_NAME], 
+    [gridSTATEMENT_DATA].[FATHER_FULLNAME] AS [FATHER_FULLNAME], 
+    [gridSTATEMENT_DATA].[MOTHER_FULLNAME] AS [MOTHER_FULLNAME], 
+    [gridSTATEMENT_DATA].[FATHER_JOBSECTOR] AS [FATHER_JOBSECTOR], 
+    [gridSTATEMENT_DATA].[MOTHER_JOBSECTOR] AS [MOTHER_JOBSECTOR]
+    FROM [dbo].[gridSTATEMENT_DATA] AS [gridSTATEMENT_DATA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="gridUSER_PARENTS" EntityType="Self.gridUSER_PARENTS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [gridUSER_PARENTS].[USER_ID] AS [USER_ID], 
+    [gridUSER_PARENTS].[USERNAME] AS [USERNAME], 
+    [gridUSER_PARENTS].[PASSWORD] AS [PASSWORD], 
+    [gridUSER_PARENTS].[USER_AFM] AS [USER_AFM], 
+    [gridUSER_PARENTS].[PARENT_TYPE] AS [PARENT_TYPE], 
+    [gridUSER_PARENTS].[CREATEDATE] AS [CREATEDATE], 
+    [gridUSER_PARENTS].[STATION_ID] AS [STATION_ID], 
+    [gridUSER_PARENTS].[AITISI_ID] AS [AITISI_ID]
+    FROM [dbo].[gridUSER_PARENTS] AS [gridUSER_PARENTS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="mor_AITISI_DATA" EntityType="Self.mor_AITISI_DATA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mor_AITISI_DATA].[AITISI_ID] AS [AITISI_ID], 
+    [mor_AITISI_DATA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [mor_AITISI_DATA].[STATION_ID] AS [STATION_ID], 
+    [mor_AITISI_DATA].[CHILD_ID] AS [CHILD_ID], 
+    [mor_AITISI_DATA].[FULLNAME] AS [FULLNAME], 
+    [mor_AITISI_DATA].[FATHER_JOBSECTOR] AS [FATHER_JOBSECTOR], 
+    [mor_AITISI_DATA].[MOTHER_JOBSECTOR] AS [MOTHER_JOBSECTOR], 
+    [mor_AITISI_DATA].[FATHER_EPIDOMA] AS [FATHER_EPIDOMA], 
+    [mor_AITISI_DATA].[MOTHER_EPIDOMA] AS [MOTHER_EPIDOMA], 
+    [mor_AITISI_DATA].[FAMILY_INCOME] AS [FAMILY_INCOME], 
+    [mor_AITISI_DATA].[DIKAIOYXOI_BOTH] AS [DIKAIOYXOI_BOTH], 
+    [mor_AITISI_DATA].[FATHER_DISABILITY] AS [FATHER_DISABILITY], 
+    [mor_AITISI_DATA].[MOTHER_DISABILITY] AS [MOTHER_DISABILITY], 
+    [mor_AITISI_DATA].[CHILD_AMEA] AS [CHILD_AMEA], 
+    [mor_AITISI_DATA].[CHILD_ORPHAN] AS [CHILD_ORPHAN], 
+    [mor_AITISI_DATA].[PARENT_DIVORCED] AS [PARENT_DIVORCED], 
+    [mor_AITISI_DATA].[PARENT_INARMY] AS [PARENT_INARMY], 
+    [mor_AITISI_DATA].[CHILDREN_NUMBER] AS [CHILDREN_NUMBER], 
+    [mor_AITISI_DATA].[RE_REGISTRATION] AS [RE_REGISTRATION], 
+    [mor_AITISI_DATA].[SIBLING_IN_BNS] AS [SIBLING_IN_BNS], 
+    [mor_AITISI_DATA].[WORKING_MOTHER] AS [WORKING_MOTHER], 
+    [mor_AITISI_DATA].[PARENTS_ID] AS [PARENTS_ID]
+    FROM [dbo].[mor_AITISI_DATA] AS [mor_AITISI_DATA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="mor_AITISI_MORIA" EntityType="Self.mor_AITISI_MORIA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mor_AITISI_MORIA].[AITISI_ID] AS [AITISI_ID], 
+    [mor_AITISI_MORIA].[STATION_ID] AS [STATION_ID], 
+    [mor_AITISI_MORIA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [mor_AITISI_MORIA].[PROSKLISI_PROTOCOL] AS [PROSKLISI_PROTOCOL], 
+    [mor_AITISI_MORIA].[AITISI_PROTOCOL] AS [AITISI_PROTOCOL], 
+    [mor_AITISI_MORIA].[CHILD_AMKA] AS [CHILD_AMKA], 
+    [mor_AITISI_MORIA].[CHILD_NAME] AS [CHILD_NAME], 
+    [mor_AITISI_MORIA].[MORIA_SOCIAL] AS [MORIA_SOCIAL], 
+    [mor_AITISI_MORIA].[MORIA_OAED] AS [MORIA_OAED], 
+    [mor_AITISI_MORIA].[MORIA_INCOME] AS [MORIA_INCOME], 
+    [mor_AITISI_MORIA].[MORIA_FAMILY] AS [MORIA_FAMILY], 
+    [mor_AITISI_MORIA].[MORIA_REREGISTER] AS [MORIA_REREGISTER], 
+    [mor_AITISI_MORIA].[MORIA_SIBLING] AS [MORIA_SIBLING], 
+    [mor_AITISI_MORIA].[MORIA_TOTAL] AS [MORIA_TOTAL], 
+    [mor_AITISI_MORIA].[RANKING] AS [RANKING]
+    FROM [dbo].[mor_AITISI_MORIA] AS [mor_AITISI_MORIA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="mor_CHILD_INFO" EntityType="Self.mor_CHILD_INFO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [mor_CHILD_INFO].[CHILD_ID] AS [CHILD_ID], 
+    [mor_CHILD_INFO].[AITISI_ID] AS [AITISI_ID], 
+    [mor_CHILD_INFO].[AMKA] AS [AMKA], 
+    [mor_CHILD_INFO].[FULLNAME] AS [FULLNAME]
+    FROM [dbo].[mor_CHILD_INFO] AS [mor_CHILD_INFO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="rep_AITISI_INFO_MORIA" EntityType="Self.rep_AITISI_INFO_MORIA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [rep_AITISI_INFO_MORIA].[AITISI_ID] AS [AITISI_ID], 
+    [rep_AITISI_INFO_MORIA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [rep_AITISI_INFO_MORIA].[STATION_ID] AS [STATION_ID], 
+    [rep_AITISI_INFO_MORIA].[AITISI_PROTOCOL] AS [AITISI_PROTOCOL], 
+    [rep_AITISI_INFO_MORIA].[AMKA] AS [AMKA], 
+    [rep_AITISI_INFO_MORIA].[FULLNAME] AS [FULLNAME], 
+    [rep_AITISI_INFO_MORIA].[AGE_CLASS_ID] AS [AGE_CLASS_ID], 
+    [rep_AITISI_INFO_MORIA].[AGE_CLASS] AS [AGE_CLASS], 
+    [rep_AITISI_INFO_MORIA].[FATHER_DISABILITY] AS [FATHER_DISABILITY], 
+    [rep_AITISI_INFO_MORIA].[MOTHER_DISABILITY] AS [MOTHER_DISABILITY], 
+    [rep_AITISI_INFO_MORIA].[CHILD_AMEA] AS [CHILD_AMEA], 
+    [rep_AITISI_INFO_MORIA].[CHILD_ORPHAN] AS [CHILD_ORPHAN], 
+    [rep_AITISI_INFO_MORIA].[PARENT_DIVORCED] AS [PARENT_DIVORCED], 
+    [rep_AITISI_INFO_MORIA].[PARENT_INARMY] AS [PARENT_INARMY], 
+    [rep_AITISI_INFO_MORIA].[DIKAIOYXOI_BOTH] AS [DIKAIOYXOI_BOTH], 
+    [rep_AITISI_INFO_MORIA].[INCOME_TEXT] AS [INCOME_TEXT], 
+    [rep_AITISI_INFO_MORIA].[CHILDREN_NUMBER] AS [CHILDREN_NUMBER], 
+    [rep_AITISI_INFO_MORIA].[RE_REGISTRATION] AS [RE_REGISTRATION], 
+    [rep_AITISI_INFO_MORIA].[SIBLING_IN_BNS] AS [SIBLING_IN_BNS], 
+    [rep_AITISI_INFO_MORIA].[PARENTS_ID] AS [PARENTS_ID], 
+    [rep_AITISI_INFO_MORIA].[MORIA_SOCIAL] AS [MORIA_SOCIAL], 
+    [rep_AITISI_INFO_MORIA].[MORIA_OAED] AS [MORIA_OAED], 
+    [rep_AITISI_INFO_MORIA].[MORIA_INCOME] AS [MORIA_INCOME], 
+    [rep_AITISI_INFO_MORIA].[MORIA_FAMILY] AS [MORIA_FAMILY], 
+    [rep_AITISI_INFO_MORIA].[MORIA_REREGISTER] AS [MORIA_REREGISTER], 
+    [rep_AITISI_INFO_MORIA].[MORIA_SIBLING] AS [MORIA_SIBLING], 
+    [rep_AITISI_INFO_MORIA].[MORIA_TOTAL] AS [MORIA_TOTAL], 
+    [rep_AITISI_INFO_MORIA].[WORKING_MOTHER] AS [WORKING_MOTHER], 
+    [rep_AITISI_INFO_MORIA].[INCOME_AMOUNT] AS [INCOME_AMOUNT], 
+    [rep_AITISI_INFO_MORIA].[RANKING] AS [RANKING], 
+    [rep_AITISI_INFO_MORIA].[RANKING_TEXT] AS [RANKING_TEXT], 
+    [rep_AITISI_INFO_MORIA].[APOKLEISMOS_AITIA] AS [APOKLEISMOS_AITIA]
+    FROM [dbo].[rep_AITISI_INFO_MORIA] AS [rep_AITISI_INFO_MORIA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlAITISEIS_LIST" EntityType="Self.sqlAITISEIS_LIST" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlAITISEIS_LIST].[AITISI_ID] AS [AITISI_ID], 
+    [sqlAITISEIS_LIST].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [sqlAITISEIS_LIST].[AITISI_DATE] AS [AITISI_DATE], 
+    [sqlAITISEIS_LIST].[AITISI_PROTOCOL] AS [AITISI_PROTOCOL], 
+    [sqlAITISEIS_LIST].[STATION_ID] AS [STATION_ID], 
+    [sqlAITISEIS_LIST].[STATION_NAME] AS [STATION_NAME], 
+    [sqlAITISEIS_LIST].[PARENTS_ID] AS [PARENTS_ID], 
+    [sqlAITISEIS_LIST].[CHILD_ID] AS [CHILD_ID], 
+    [sqlAITISEIS_LIST].[CHILD_FULLNAME] AS [CHILD_FULLNAME], 
+    [sqlAITISEIS_LIST].[BIRTHDATE] AS [BIRTHDATE], 
+    [sqlAITISEIS_LIST].[GENDER] AS [GENDER], 
+    [sqlAITISEIS_LIST].[AGE] AS [AGE], 
+    [sqlAITISEIS_LIST].[AGE_CATEGORY] AS [AGE_CATEGORY], 
+    [sqlAITISEIS_LIST].[MORIA_TOTAL] AS [MORIA_TOTAL], 
+    [sqlAITISEIS_LIST].[RANKING_TEXT] AS [RANKING_TEXT]
+    FROM [dbo].[sqlAITISEIS_LIST] AS [sqlAITISEIS_LIST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlAPPLICANT_INFO" EntityType="Self.sqlAPPLICANT_INFO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlAPPLICANT_INFO].[USER_ID] AS [USER_ID], 
+    [sqlAPPLICANT_INFO].[PARENTS_ID] AS [PARENTS_ID], 
+    [sqlAPPLICANT_INFO].[USERNAME] AS [USERNAME], 
+    [sqlAPPLICANT_INFO].[PARENT_FULLNAME] AS [PARENT_FULLNAME], 
+    [sqlAPPLICANT_INFO].[PARENT_AFM] AS [PARENT_AFM], 
+    [sqlAPPLICANT_INFO].[PARENT_AMKA] AS [PARENT_AMKA], 
+    [sqlAPPLICANT_INFO].[PARENT_PHONEHOME] AS [PARENT_PHONEHOME], 
+    [sqlAPPLICANT_INFO].[PARENT_PHONEWORK] AS [PARENT_PHONEWORK], 
+    [sqlAPPLICANT_INFO].[PARENT_PHONEMOBILE] AS [PARENT_PHONEMOBILE]
+    FROM [dbo].[sqlAPPLICANT_INFO] AS [sqlAPPLICANT_INFO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlCHILD_SELECTOR" EntityType="Self.sqlCHILD_SELECTOR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlCHILD_SELECTOR].[CHILD_ID] AS [CHILD_ID], 
+    [sqlCHILD_SELECTOR].[FULLNAME] AS [FULLNAME], 
+    [sqlCHILD_SELECTOR].[PARENTS_ID] AS [PARENTS_ID]
+    FROM [dbo].[sqlCHILD_SELECTOR] AS [sqlCHILD_SELECTOR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlCHILDREN_DATA" EntityType="Self.sqlCHILDREN_DATA" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlCHILDREN_DATA].[CHILD_ID] AS [CHILD_ID], 
+    [sqlCHILDREN_DATA].[AMKA] AS [AMKA], 
+    [sqlCHILDREN_DATA].[FIRSTNAME] AS [FIRSTNAME], 
+    [sqlCHILDREN_DATA].[LASTNAME] AS [LASTNAME], 
+    [sqlCHILDREN_DATA].[BIRTHDATE] AS [BIRTHDATE], 
+    [sqlCHILDREN_DATA].[GENDER] AS [GENDER], 
+    [sqlCHILDREN_DATA].[NATIONALITY] AS [NATIONALITY], 
+    [sqlCHILDREN_DATA].[PARENTS_ID] AS [PARENTS_ID], 
+    [sqlCHILDREN_DATA].[PARENT_FULLNAME] AS [PARENT_FULLNAME], 
+    [sqlCHILDREN_DATA].[STATION_ID] AS [STATION_ID], 
+    [sqlCHILDREN_DATA].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [sqlCHILDREN_DATA].[AITISI_ID] AS [AITISI_ID]
+    FROM [dbo].[sqlCHILDREN_DATA] AS [sqlCHILDREN_DATA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlCHILDREN_POPULATOR" EntityType="Self.sqlCHILDREN_POPULATOR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlCHILDREN_POPULATOR].[CHILD_ID] AS [CHILD_ID], 
+    [sqlCHILDREN_POPULATOR].[FULLNAME] AS [FULLNAME], 
+    [sqlCHILDREN_POPULATOR].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [sqlCHILDREN_POPULATOR].[STATION_ID] AS [STATION_ID]
+    FROM [dbo].[sqlCHILDREN_POPULATOR] AS [sqlCHILDREN_POPULATOR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlPARENT_INFO" EntityType="Self.sqlPARENT_INFO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlPARENT_INFO].[PARENTS_ID] AS [PARENTS_ID], 
+    [sqlPARENT_INFO].[FATHER_FULLNAME] AS [FATHER_FULLNAME], 
+    [sqlPARENT_INFO].[MOTHER_FULLNAME] AS [MOTHER_FULLNAME], 
+    [sqlPARENT_INFO].[FATHER_AFM] AS [FATHER_AFM], 
+    [sqlPARENT_INFO].[FATHER_AMKA] AS [FATHER_AMKA], 
+    [sqlPARENT_INFO].[FATHER_ADDRESS] AS [FATHER_ADDRESS], 
+    [sqlPARENT_INFO].[FATHER_EMAIL] AS [FATHER_EMAIL], 
+    [sqlPARENT_INFO].[FATHER_PHONEHOME] AS [FATHER_PHONEHOME], 
+    [sqlPARENT_INFO].[FATHER_PHONEMOBILE] AS [FATHER_PHONEMOBILE], 
+    [sqlPARENT_INFO].[FATHER_PHONEWORK] AS [FATHER_PHONEWORK], 
+    [sqlPARENT_INFO].[MOTHER_AFM] AS [MOTHER_AFM], 
+    [sqlPARENT_INFO].[MOTHER_AMKA] AS [MOTHER_AMKA], 
+    [sqlPARENT_INFO].[MOTHER_ADDRESS] AS [MOTHER_ADDRESS], 
+    [sqlPARENT_INFO].[MOTHER_EMAIL] AS [MOTHER_EMAIL], 
+    [sqlPARENT_INFO].[MOTHER_PHONEHOME] AS [MOTHER_PHONEHOME], 
+    [sqlPARENT_INFO].[MOTHER_PHONEMOBILE] AS [MOTHER_PHONEMOBILE], 
+    [sqlPARENT_INFO].[MOTHER_PHONEWORK] AS [MOTHER_PHONEWORK], 
+    [sqlPARENT_INFO].[FSTATUS_TEXT] AS [FSTATUS_TEXT], 
+    [sqlPARENT_INFO].[PARENT_TYPETEXT] AS [PARENT_TYPETEXT]
+    FROM [dbo].[sqlPARENT_INFO] AS [sqlPARENT_INFO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlPARENT_SELECTOR" EntityType="Self.sqlPARENT_SELECTOR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlPARENT_SELECTOR].[PARENTS_ID] AS [PARENTS_ID], 
+    [sqlPARENT_SELECTOR].[PARENT_FULLNAME] AS [PARENT_FULLNAME]
+    FROM [dbo].[sqlPARENT_SELECTOR] AS [sqlPARENT_SELECTOR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlUPLOADED_FILES" EntityType="Self.sqlUPLOADED_FILES" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlUPLOADED_FILES].[FILE_ID] AS [FILE_ID], 
+    [sqlUPLOADED_FILES].[PROSKLISI_ID] AS [PROSKLISI_ID], 
+    [sqlUPLOADED_FILES].[AITISI_ID] AS [AITISI_ID], 
+    [sqlUPLOADED_FILES].[STATION_ID] AS [STATION_ID], 
+    [sqlUPLOADED_FILES].[UPLOAD_NAME] AS [UPLOAD_NAME], 
+    [sqlUPLOADED_FILES].[UPLOAD_SUMMARY] AS [UPLOAD_SUMMARY], 
+    [sqlUPLOADED_FILES].[FILENAME] AS [FILENAME], 
+    [sqlUPLOADED_FILES].[EXTENSION] AS [EXTENSION], 
+    [sqlUPLOADED_FILES].[STATION_USER] AS [STATION_USER], 
+    [sqlUPLOADED_FILES].[SCHOOLYEAR_TEXT] AS [SCHOOLYEAR_TEXT]
+    FROM [dbo].[sqlUPLOADED_FILES] AS [sqlUPLOADED_FILES]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlUSER_PARENT_SELECT" EntityType="Self.sqlUSER_PARENT_SELECT" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlUSER_PARENT_SELECT].[USER_ID] AS [USER_ID], 
+    [sqlUSER_PARENT_SELECT].[USER_AFM] AS [USER_AFM], 
+    [sqlUSER_PARENT_SELECT].[PARENT_TYPETEXT] AS [PARENT_TYPETEXT], 
+    [sqlUSER_PARENT_SELECT].[CREATEDATE] AS [CREATEDATE], 
+    [sqlUSER_PARENT_SELECT].[PARENT_FULLNAME] AS [PARENT_FULLNAME]
+    FROM [dbo].[sqlUSER_PARENT_SELECT] AS [sqlUSER_PARENT_SELECT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="sqlUSER_STATION" EntityType="Self.sqlUSER_STATION" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sqlUSER_STATION].[USER_ID] AS [USER_ID], 
+    [sqlUSER_STATION].[USERNAME] AS [USERNAME], 
+    [sqlUSER_STATION].[PASSWORD] AS [PASSWORD], 
+    [sqlUSER_STATION].[STATION_ID] AS [STATION_ID], 
+    [sqlUSER_STATION].[ΕΠΩΝΥΜΙΑ] AS [ΕΠΩΝΥΜΙΑ]
+    FROM [dbo].[sqlUSER_STATION] AS [sqlUSER_STATION]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AITISIS_CHILDREN" Association="Self.FK_AITISIS_CHILDREN">
+            <End Role="CHILDREN" EntitySet="CHILDREN" />
+            <End Role="AITISIS" EntitySet="AITISIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AITISIS_PARENTS1" Association="Self.FK_AITISIS_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="AITISIS" EntitySet="AITISIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CHILDREN_PARENTS1" Association="Self.FK_CHILDREN_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="CHILDREN" EntitySet="CHILDREN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NEW_UPLOADS_FILES_NEW_UPLOADS" Association="Self.FK_NEW_UPLOADS_FILES_NEW_UPLOADS">
+            <End Role="UPLOADS" EntitySet="UPLOADS" />
+            <End Role="UPLOADS_FILES" EntitySet="UPLOADS_FILES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATEMENTS_PARENTS1" Association="Self.FK_STATEMENTS_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="STATEMENTS" EntitySet="STATEMENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_DIMOS_SYS_PERIFERIES" Association="Self.FK_SYS_DIMOS_SYS_PERIFERIES">
+            <End Role="SYS_PERIFERIES" EntitySet="SYS_PERIFERIES" />
+            <End Role="SYS_DIMOS" EntitySet="SYS_DIMOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SYS_STATIONS_SYS_PERIFERIAKES" Association="Self.FK_SYS_STATIONS_SYS_PERIFERIAKES">
+            <End Role="SYS_PERIFERIAKES" EntitySet="SYS_PERIFERIAKES" />
+            <End Role="SYS_STATIONS" EntitySet="SYS_STATIONS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HermesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HermesDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="APP_STATUS" EntityType="HermesDBModel.APP_STATUS" />
+          <EntitySet Name="SYS_GENDERS" EntityType="HermesDBModel.SYS_GENDERS" />
+          <EntitySet Name="SYS_DIMOS" EntityType="HermesDBModel.SYS_DIMOS" />
+          <EntitySet Name="SYS_PERIFERIES" EntityType="HermesDBModel.SYS_PERIFERIES" />
+          <AssociationSet Name="FK_SYS_DIMOS_SYS_PERIFERIES" Association="HermesDBModel.FK_SYS_DIMOS_SYS_PERIFERIES">
+            <End Role="SYS_PERIFERIES" EntitySet="SYS_PERIFERIES" />
+            <End Role="SYS_DIMOS" EntitySet="SYS_DIMOS" />
+          </AssociationSet>
+          <EntitySet Name="SYS_STATIONS" EntityType="HermesDBModel.SYS_STATIONS" />
+          <EntitySet Name="USER_ADMINS" EntityType="HermesDBModel.USER_ADMINS" />
+          <EntitySet Name="USER_STATIONS" EntityType="HermesDBModel.USER_STATIONS" />
+          <EntitySet Name="sqlUSER_STATION" EntityType="HermesDBModel.sqlUSER_STATION" />
+          <EntitySet Name="USER_PARENTS" EntityType="HermesDBModel.USER_PARENTS" />
+          <EntitySet Name="PARENT_TYPES" EntityType="HermesDBModel.PARENT_TYPES" />
+          <EntitySet Name="SYS_SCHOOLYEARS" EntityType="HermesDBModel.SYS_SCHOOLYEARS" />
+          <EntitySet Name="PROSKLISIS_STATUS" EntityType="HermesDBModel.PROSKLISIS_STATUS" />
+          <EntitySet Name="SYS_PERIFERIAKES" EntityType="HermesDBModel.SYS_PERIFERIAKES" />
+          <AssociationSet Name="FK_SYS_STATIONS_SYS_PERIFERIAKES" Association="HermesDBModel.FK_SYS_STATIONS_SYS_PERIFERIAKES">
+            <End Role="SYS_PERIFERIAKES" EntitySet="SYS_PERIFERIAKES" />
+            <End Role="SYS_STATIONS" EntitySet="SYS_STATIONS" />
+          </AssociationSet>
+          <EntitySet Name="FAMILY_STATUS" EntityType="HermesDBModel.FAMILY_STATUS" />
+          <EntitySet Name="SYS_NATIONALITIES" EntityType="HermesDBModel.SYS_NATIONALITIES" />
+          <EntitySet Name="PARENTS" EntityType="HermesDBModel.PARENTS" />
+          <EntitySet Name="sqlCHILD_SELECTOR" EntityType="HermesDBModel.sqlCHILD_SELECTOR" />
+          <EntitySet Name="UPLOADS" EntityType="HermesDBModel.UPLOADS" />
+          <EntitySet Name="UPLOADS_FILES" EntityType="HermesDBModel.UPLOADS_FILES" />
+          <AssociationSet Name="FK_UPLOADS_FILES_UPLOADS" Association="HermesDBModel.FK_UPLOADS_FILES_UPLOADS">
+            <End Role="UPLOADS" EntitySet="UPLOADS" />
+            <End Role="UPLOADS_FILES" EntitySet="UPLOADS_FILES" />
+          </AssociationSet>
+          <EntitySet Name="JOB_SECTORS" EntityType="HermesDBModel.JOB_SECTORS" />
+          <EntitySet Name="sqlPARENT_INFO" EntityType="HermesDBModel.sqlPARENT_INFO" />
+          <EntitySet Name="NUMBERS" EntityType="HermesDBModel.NUMBERS" />
+          <EntitySet Name="SYS_YESNO" EntityType="HermesDBModel.SYS_YESNO" />
+          <EntitySet Name="gridPARENT_DATA" EntityType="HermesDBModel.gridPARENT_DATA" />
+          <EntitySet Name="gridAITISEIS_DATA" EntityType="HermesDBModel.gridAITISEIS_DATA" />
+          <EntitySet Name="gridSTATEMENT_DATA" EntityType="HermesDBModel.gridSTATEMENT_DATA" />
+          <EntitySet Name="sqlAPPLICANT_INFO" EntityType="HermesDBModel.sqlAPPLICANT_INFO" />
+          <EntitySet Name="gridUSER_PARENTS" EntityType="HermesDBModel.gridUSER_PARENTS" />
+          <EntitySet Name="sqlCHILDREN_DATA" EntityType="HermesDBModel.sqlCHILDREN_DATA" />
+          <EntitySet Name="TAXISNET" EntityType="HermesDBModel.TAXISNET" />
+          <EntitySet Name="sqlUSER_PARENT_SELECT" EntityType="HermesDBModel.sqlUSER_PARENT_SELECT" />
+          <EntitySet Name="FAMILY_INCOME" EntityType="HermesDBModel.FAMILY_INCOME" />
+          <EntitySet Name="mor_AITISI_DATA" EntityType="HermesDBModel.mor_AITISI_DATA" />
+          <EntitySet Name="mor_AITISI_MORIA" EntityType="HermesDBModel.mor_AITISI_MORIA" />
+          <EntitySet Name="RANKINGS" EntityType="HermesDBModel.RANKINGS" />
+          <EntitySet Name="sqlAITISEIS_LIST" EntityType="HermesDBModel.sqlAITISEIS_LIST" />
+          <EntitySet Name="mor_CHILD_INFO" EntityType="HermesDBModel.mor_CHILD_INFO" />
+          <EntitySet Name="AGE_CLASSES" EntityType="HermesDBModel.AGE_CLASSES" />
+          <EntitySet Name="CHILDREN" EntityType="HermesDBModel.CHILDREN" />
+          <AssociationSet Name="FK_CHILDREN_PARENTS1" Association="HermesDBModel.FK_CHILDREN_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="CHILDREN" EntitySet="CHILDREN" />
+          </AssociationSet>
+          <EntitySet Name="PROSKLISIS" EntityType="HermesDBModel.PROSKLISIS" />
+          <EntitySet Name="STATEMENTS" EntityType="HermesDBModel.STATEMENTS" />
+          <AssociationSet Name="FK_STATEMENTS_PARENTS1" Association="HermesDBModel.FK_STATEMENTS_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="STATEMENTS" EntitySet="STATEMENTS" />
+          </AssociationSet>
+          <EntitySet Name="AITISIS" EntityType="HermesDBModel.AITISIS" />
+          <AssociationSet Name="FK_AITISIS_PARENTS1" Association="HermesDBModel.FK_AITISIS_PARENTS1">
+            <End Role="PARENTS" EntitySet="PARENTS" />
+            <End Role="AITISIS" EntitySet="AITISIS" />
+          </AssociationSet>
+          <EntitySet Name="rep_AITISI_INFO_MORIA" EntityType="HermesDBModel.rep_AITISI_INFO_MORIA" />
+          <EntitySet Name="sqlCHILDREN_POPULATOR" EntityType="HermesDBModel.sqlCHILDREN_POPULATOR" />
+          <AssociationSet Name="FK_AITISIS_CHILDREN" Association="HermesDBModel.FK_AITISIS_CHILDREN">
+            <End Role="CHILDREN" EntitySet="CHILDREN" />
+            <End Role="AITISIS" EntitySet="AITISIS" />
+          </AssociationSet>
+          <EntitySet Name="sqlUPLOADED_FILES" EntityType="HermesDBModel.sqlUPLOADED_FILES" />
+          <EntitySet Name="SUPPORT" EntityType="HermesDBModel.SUPPORT" />
+          <EntitySet Name="sqlPARENT_SELECTOR" EntityType="HermesDBModel.sqlPARENT_SELECTOR" />
+        </EntityContainer>
+        <EntityType Name="APP_STATUS">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS_VALUE" Type="Boolean" />
+          <Property Name="LOCAL_TEST" Type="Boolean" />
+          <Property Name="STATUS_MESSAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_ENABLE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="SYS_GENDERS">
+          <Key>
+            <PropertyRef Name="GENDER_ID" />
+          </Key>
+          <Property Name="GENDER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_DIMOS">
+          <Key>
+            <PropertyRef Name="DIMOS_ID" />
+          </Key>
+          <Property Name="DIMOS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DIMOS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIMOS_PERIFERIA" Type="Int32" />
+          <NavigationProperty Name="SYS_PERIFERIES" Relationship="HermesDBModel.FK_SYS_DIMOS_SYS_PERIFERIES" FromRole="SYS_DIMOS" ToRole="SYS_PERIFERIES" />
+        </EntityType>
+        <EntityType Name="SYS_PERIFERIES">
+          <Key>
+            <PropertyRef Name="PERIFERIA_ID" />
+          </Key>
+          <Property Name="PERIFERIA_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PERIFERIA_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_DIMOS" Relationship="HermesDBModel.FK_SYS_DIMOS_SYS_PERIFERIES" FromRole="SYS_PERIFERIES" ToRole="SYS_DIMOS" />
+        </EntityType>
+        <Association Name="FK_SYS_DIMOS_SYS_PERIFERIES">
+          <End Type="HermesDBModel.SYS_PERIFERIES" Role="SYS_PERIFERIES" Multiplicity="0..1" />
+          <End Type="HermesDBModel.SYS_DIMOS" Role="SYS_DIMOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PERIFERIES">
+              <PropertyRef Name="PERIFERIA_ID" />
+            </Principal>
+            <Dependent Role="SYS_DIMOS">
+              <PropertyRef Name="DIMOS_PERIFERIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SYS_STATIONS">
+          <Key>
+            <PropertyRef Name="ΣΤΑΘΜΟΣ_ΚΩΔ" />
+          </Key>
+          <Property Name="ΣΤΑΘΜΟΣ_ΚΩΔ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ΕΠΩΝΥΜΙΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΓΡΑΜΜΑΤΕΙΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΤΗΛΕΦΩΝΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΦΑΞ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΠΕΡΙΦΕΡΕΙΑΚΗ" Type="Int32" />
+          <Property Name="ΠΕΡΙΦΕΡΕΙΑ" Type="Int32" />
+          <Property Name="ΥΠΕΥΘΥΝΟΣ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΥΠΕΥΘΥΝΟΣ_ΦΥΛΟ" Type="Int32" />
+          <Property Name="ΚΙΝΗΤΟ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_PERIFERIAKES" Relationship="HermesDBModel.FK_SYS_STATIONS_SYS_PERIFERIAKES" FromRole="SYS_STATIONS" ToRole="SYS_PERIFERIAKES" />
+          <Property Name="ΣΥΜΜΕΤΟΧΗ" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="USER_ADMINS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="ISACTIVE" Type="Boolean" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="USER_STATIONS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="ISACTIVE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="sqlUSER_STATION">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="ΕΠΩΝΥΜΙΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USER_PARENTS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="USER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_TYPE" Type="Int32" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PARENT_TYPES">
+          <Key>
+            <PropertyRef Name="PARENT_TYPEID" />
+          </Key>
+          <Property Name="PARENT_TYPEID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PARENT_TYPETEXT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_SCHOOLYEARS">
+          <Key>
+            <PropertyRef Name="SY_ID" />
+          </Key>
+          <Property Name="SY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SY_TEXT" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="SY_DATESTART" Type="DateTime" Precision="0" />
+          <Property Name="SY_DATEEND" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="PROSKLISIS_STATUS">
+          <Key>
+            <PropertyRef Name="STATUS_ID" />
+          </Key>
+          <Property Name="STATUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_PERIFERIAKES">
+          <Key>
+            <PropertyRef Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" />
+          </Key>
+          <Property Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ΕΠΩΝΥΜΙΑ_ΠΕΡΙΦΕΡΕΙΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΠΕΡΙΦ_ΣΥΝΤΟΜΟΓΡΑΦΙΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΕΔΡΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΤΜΗΜΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ΤΗΛΕΦΩΝΑ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FAX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SYS_STATIONS" Relationship="HermesDBModel.FK_SYS_STATIONS_SYS_PERIFERIAKES" FromRole="SYS_PERIFERIAKES" ToRole="SYS_STATIONS" />
+        </EntityType>
+        <Association Name="FK_SYS_STATIONS_SYS_PERIFERIAKES">
+          <End Type="HermesDBModel.SYS_PERIFERIAKES" Role="SYS_PERIFERIAKES" Multiplicity="0..1" />
+          <End Type="HermesDBModel.SYS_STATIONS" Role="SYS_STATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SYS_PERIFERIAKES">
+              <PropertyRef Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" />
+            </Principal>
+            <Dependent Role="SYS_STATIONS">
+              <PropertyRef Name="ΠΕΡΙΦΕΡΕΙΑΚΗ" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FAMILY_STATUS">
+          <Key>
+            <PropertyRef Name="FSTATUS_ID" />
+          </Key>
+          <Property Name="FSTATUS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FSTATUS_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SYS_NATIONALITIES">
+          <Key>
+            <PropertyRef Name="NATIONALITY_ID" />
+          </Key>
+          <Property Name="NATIONALITY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NATIONALITY_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PARENTS">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FATHER_FIRSTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_LASTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_FIRSTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_LASTNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_ADT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_ADT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PASSPORT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PASSPORT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PERMIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PERMIT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FAMILY_STATUS" Type="Int32" />
+          <Property Name="CHILD_EPIMELEIA" Type="Int32" />
+          <Property Name="PARENT_USERID" Type="Int32" />
+          <NavigationProperty Name="CHILDREN" Relationship="HermesDBModel.FK_CHILDREN_PARENTS1" FromRole="PARENTS" ToRole="CHILDREN" />
+          <NavigationProperty Name="STATEMENTS" Relationship="HermesDBModel.FK_STATEMENTS_PARENTS1" FromRole="PARENTS" ToRole="STATEMENTS" />
+          <NavigationProperty Name="AITISIS" Relationship="HermesDBModel.FK_AITISIS_PARENTS1" FromRole="PARENTS" ToRole="AITISIS" />
+        </EntityType>
+        <EntityType Name="sqlCHILD_SELECTOR">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UPLOADS">
+          <Key>
+            <PropertyRef Name="UPLOAD_ID" />
+          </Key>
+          <Property Name="UPLOAD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="AITISI_ID" Type="Int32" />
+          <Property Name="PARENT_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="UPLOAD_DATE" Type="DateTime" Precision="0" />
+          <Property Name="UPLOAD_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPLOAD_SUMMARY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UPLOADS_FILES" Relationship="HermesDBModel.FK_UPLOADS_FILES_UPLOADS" FromRole="UPLOADS" ToRole="UPLOADS_FILES" />
+        </EntityType>
+        <EntityType Name="UPLOADS_FILES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="STATION_USER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOLYEAR_TEXT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FILENAME" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="EXTENSION" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UPLOAD_ID" Type="Int32" />
+          <NavigationProperty Name="UPLOADS" Relationship="HermesDBModel.FK_UPLOADS_FILES_UPLOADS" FromRole="UPLOADS_FILES" ToRole="UPLOADS" />
+        </EntityType>
+        <Association Name="FK_UPLOADS_FILES_UPLOADS">
+          <End Type="HermesDBModel.UPLOADS" Role="UPLOADS" Multiplicity="0..1" />
+          <End Type="HermesDBModel.UPLOADS_FILES" Role="UPLOADS_FILES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UPLOADS">
+              <PropertyRef Name="UPLOAD_ID" />
+            </Principal>
+            <Dependent Role="UPLOADS_FILES">
+              <PropertyRef Name="UPLOAD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JOB_SECTORS">
+          <Key>
+            <PropertyRef Name="JOBSECTOR_ID" />
+          </Key>
+          <Property Name="JOBSECTOR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JOBSECTOR_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sqlPARENT_INFO">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="Int32" Nullable="false" />
+          <Property Name="FATHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FSTATUS_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_TYPETEXT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="FATHER_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_ADDRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NUMBERS">
+          <Key>
+            <PropertyRef Name="NUMBER_ID" />
+          </Key>
+          <Property Name="NUMBER_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NUMBER" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SYS_YESNO">
+          <Key>
+            <PropertyRef Name="YESNO_ID" />
+          </Key>
+          <Property Name="YESNO_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YESNO_TEXT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="gridPARENT_DATA">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FATHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="AITISI_ID" Type="Int32" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="gridAITISEIS_DATA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="AITISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AITISI_DATE" Type="DateTime" Precision="0" />
+          <Property Name="PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="SCHOOL_YEAR" Type="Int32" />
+          <Property Name="SY_TEXT" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTHDATE" Type="DateTime" Precision="0" />
+          <Property Name="AGE" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="GENDER" Type="Int32" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="AGE_CATEGORY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="gridSTATEMENT_DATA">
+          <Key>
+            <PropertyRef Name="STATEMENT_ID" />
+          </Key>
+          <Property Name="STATEMENT_ID" Type="Int32" Nullable="false" />
+          <Property Name="STATEMENT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SY_TEXT" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="STATION_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_JOBSECTOR" Type="Int32" />
+          <Property Name="MOTHER_JOBSECTOR" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sqlAPPLICANT_INFO">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_PHONEHOME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_PHONEWORK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_PHONEMOBILE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PARENTS_ID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="gridUSER_PARENTS">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="USER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_TYPE" Type="Int32" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="AITISI_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sqlCHILDREN_DATA">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" />
+          <Property Name="AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FIRSTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LASTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTHDATE" Type="DateTime" Precision="0" />
+          <Property Name="GENDER" Type="Int32" />
+          <Property Name="NATIONALITY" Type="Int32" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="PARENT_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="AITISI_ID" Type="Int32" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="TAXISNET">
+          <Key>
+            <PropertyRef Name="TAXISNET_ID" />
+          </Key>
+          <Property Name="TAXISNET_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RANDOM_NUMBER" Type="Int32" />
+          <Property Name="TAXISNET_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sqlUSER_PARENT_SELECT">
+          <Key>
+            <PropertyRef Name="USER_ID" />
+          </Key>
+          <Property Name="USER_ID" Type="Int32" Nullable="false" />
+          <Property Name="USER_AFM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PARENT_TYPETEXT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="CREATEDATE" Type="DateTime" Precision="3" />
+          <Property Name="PARENT_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="FAMILY_INCOME">
+          <Key>
+            <PropertyRef Name="INCOME_ID" />
+          </Key>
+          <Property Name="INCOME_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INCOME_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="INCOME_MORIA" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mor_AITISI_DATA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+            <PropertyRef Name="CHILD_ID" />
+            <PropertyRef Name="WORKING_MOTHER" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_JOBSECTOR" Type="Int32" />
+          <Property Name="MOTHER_JOBSECTOR" Type="Int32" />
+          <Property Name="FATHER_EPIDOMA" Type="Boolean" />
+          <Property Name="MOTHER_EPIDOMA" Type="Boolean" />
+          <Property Name="FAMILY_INCOME" Type="Int32" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="Boolean" />
+          <Property Name="FATHER_DISABILITY" Type="Boolean" />
+          <Property Name="MOTHER_DISABILITY" Type="Boolean" />
+          <Property Name="CHILD_AMEA" Type="Boolean" />
+          <Property Name="CHILD_ORPHAN" Type="Boolean" />
+          <Property Name="PARENT_DIVORCED" Type="Boolean" />
+          <Property Name="PARENT_INARMY" Type="Boolean" />
+          <Property Name="CHILDREN_NUMBER" Type="Int32" />
+          <Property Name="RE_REGISTRATION" Type="Boolean" />
+          <Property Name="SIBLING_IN_BNS" Type="Boolean" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="WORKING_MOTHER" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="mor_AITISI_MORIA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="PROSKLISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AITISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CHILD_AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CHILD_NAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="MORIA_SOCIAL" Type="Int32" />
+          <Property Name="MORIA_OAED" Type="Int32" />
+          <Property Name="MORIA_INCOME" Type="Int32" />
+          <Property Name="MORIA_FAMILY" Type="Int32" />
+          <Property Name="MORIA_REREGISTER" Type="Int32" />
+          <Property Name="MORIA_SIBLING" Type="Int32" />
+          <Property Name="MORIA_TOTAL" Type="Int32" />
+          <Property Name="RANKING" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RANKINGS">
+          <Key>
+            <PropertyRef Name="RANKING_ID" />
+          </Key>
+          <Property Name="RANKING_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RANKING_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sqlAITISEIS_LIST">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="AITISI_DATE" Type="DateTime" Precision="0" />
+          <Property Name="AITISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="STATION_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="CHILD_ID" Type="Int32" />
+          <Property Name="CHILD_FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTHDATE" Type="DateTime" Precision="0" />
+          <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AGE" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MORIA_TOTAL" Type="Int32" />
+          <Property Name="RANKING_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AGE_CATEGORY" Type="Int32" />
+        </EntityType>
+        <EntityType Name="mor_CHILD_INFO">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" />
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AGE_CLASSES">
+          <Key>
+            <PropertyRef Name="CATEGORY_ID" />
+          </Key>
+          <Property Name="CATEGORY_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AGE_START" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AGE_END" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="CHILDREN">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FIRSTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LASTNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BIRTHDATE" Type="DateTime" Precision="0" />
+          <Property Name="GENDER" Type="Int32" />
+          <Property Name="NATIONALITY" Type="Int32" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <NavigationProperty Name="PARENTS" Relationship="HermesDBModel.FK_CHILDREN_PARENTS1" FromRole="CHILDREN" ToRole="PARENTS" />
+          <NavigationProperty Name="AITISIS" Relationship="HermesDBModel.FK_AITISIS_CHILDREN" FromRole="CHILDREN" ToRole="AITISIS" />
+        </EntityType>
+        <Association Name="FK_CHILDREN_PARENTS1">
+          <End Type="HermesDBModel.PARENTS" Role="PARENTS" Multiplicity="0..1" />
+          <End Type="HermesDBModel.CHILDREN" Role="CHILDREN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="CHILDREN">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PROSKLISIS">
+          <Key>
+            <PropertyRef Name="PROSKLISI_ID" />
+          </Key>
+          <Property Name="PROSKLISI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOL_YEAR" Type="Int32" />
+          <Property Name="DATE_START" Type="DateTime" Precision="0" />
+          <Property Name="DATE_END" Type="DateTime" Precision="0" />
+          <Property Name="DIOIKITIS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="ACTIVE" Type="Boolean" />
+          <Property Name="USERVIEW" Type="Boolean" />
+          <Property Name="HOUR_START" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HOUR_END" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="STATEMENTS">
+          <Key>
+            <PropertyRef Name="STATEMENT_ID" />
+          </Key>
+          <Property Name="STATEMENT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATEMENT_DATE" Type="DateTime" Precision="0" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="FATHER_JOBSECTOR" Type="Int32" />
+          <Property Name="FATHER_AMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_DELTIOANERGIA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_EPIDOMA" Type="Int32" />
+          <Property Name="MOTHER_JOBSECTOR" Type="Int32" />
+          <Property Name="MOTHER_AMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_DELTIOANERGIA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOTHER_EPIDOMA" Type="Int32" />
+          <Property Name="INCOME_CATEGORY" Type="Int32" />
+          <Property Name="INCOME_FAMILY" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="Boolean" />
+          <Property Name="FATHER_DISABILITY" Type="Boolean" />
+          <Property Name="MOTHER_DISABILITY" Type="Boolean" />
+          <Property Name="CHILD_AMEA" Type="Boolean" />
+          <Property Name="CHILD_ORPHAN" Type="Boolean" />
+          <Property Name="PARENT_DIVORCED" Type="Boolean" />
+          <Property Name="PARENT_INARMY" Type="Boolean" />
+          <Property Name="CHILDREN_MINOR" Type="Int32" />
+          <Property Name="RE_REGISTRATION" Type="Boolean" />
+          <Property Name="SIBLING_IN_BNS" Type="Boolean" />
+          <NavigationProperty Name="PARENTS" Relationship="HermesDBModel.FK_STATEMENTS_PARENTS1" FromRole="STATEMENTS" ToRole="PARENTS" />
+        </EntityType>
+        <Association Name="FK_STATEMENTS_PARENTS1">
+          <End Type="HermesDBModel.PARENTS" Role="PARENTS" Multiplicity="0..1" />
+          <End Type="HermesDBModel.STATEMENTS" Role="STATEMENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="STATEMENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AITISIS">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="AITISI_DATE" Type="DateTime" Precision="0" />
+          <Property Name="AITISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="CHILD_ID" Type="Int32" />
+          <Property Name="TIMESTAMP" Type="DateTime" Precision="3" />
+          <Property Name="AGE" Type="Decimal" Precision="10" Scale="3" />
+          <Property Name="AGE_CATEGORY" Type="Int32" />
+          <Property Name="MORIA_SOCIAL" Type="Int32" />
+          <Property Name="MORIA_OAED" Type="Int32" />
+          <Property Name="MORIA_INCOME" Type="Int32" />
+          <Property Name="MORIA_FAMILY" Type="Int32" />
+          <Property Name="MORIA_REREGISTER" Type="Int32" />
+          <Property Name="MORIA_SIBLING" Type="Int32" />
+          <Property Name="MORIA_TOTAL" Type="Int32" />
+          <Property Name="RANKING" Type="Int32" />
+          <Property Name="ENSTASI" Type="Boolean" />
+          <Property Name="APOKLEISMOS_AITIA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EPITROPI1_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EPITROPI2_TEXT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PARENTS" Relationship="HermesDBModel.FK_AITISIS_PARENTS1" FromRole="AITISIS" ToRole="PARENTS" />
+          <Property Name="RE_REGISTRATION" Type="Boolean" />
+          <NavigationProperty Name="CHILDREN" Relationship="HermesDBModel.FK_AITISIS_CHILDREN" FromRole="AITISIS" ToRole="CHILDREN" />
+        </EntityType>
+        <Association Name="FK_AITISIS_PARENTS1">
+          <End Type="HermesDBModel.PARENTS" Role="PARENTS" Multiplicity="0..1" />
+          <End Type="HermesDBModel.AITISIS" Role="AITISIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PARENTS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Principal>
+            <Dependent Role="AITISIS">
+              <PropertyRef Name="PARENTS_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="rep_AITISI_INFO_MORIA">
+          <Key>
+            <PropertyRef Name="AITISI_ID" />
+            <PropertyRef Name="AGE_CLASS_ID" />
+            <PropertyRef Name="WORKING_MOTHER" />
+          </Key>
+          <Property Name="AITISI_ID" Type="Int32" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="AITISI_PROTOCOL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AMKA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="AGE_CLASS_ID" Type="Int32" Nullable="false" />
+          <Property Name="AGE_CLASS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FATHER_DISABILITY" Type="Boolean" />
+          <Property Name="MOTHER_DISABILITY" Type="Boolean" />
+          <Property Name="CHILD_AMEA" Type="Boolean" />
+          <Property Name="CHILD_ORPHAN" Type="Boolean" />
+          <Property Name="PARENT_DIVORCED" Type="Boolean" />
+          <Property Name="PARENT_INARMY" Type="Boolean" />
+          <Property Name="DIKAIOYXOI_BOTH" Type="Boolean" />
+          <Property Name="INCOME_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CHILDREN_NUMBER" Type="Int32" />
+          <Property Name="RE_REGISTRATION" Type="Boolean" />
+          <Property Name="SIBLING_IN_BNS" Type="Boolean" />
+          <Property Name="PARENTS_ID" Type="Int32" />
+          <Property Name="MORIA_SOCIAL" Type="Int32" />
+          <Property Name="MORIA_OAED" Type="Int32" />
+          <Property Name="MORIA_INCOME" Type="Int32" />
+          <Property Name="MORIA_FAMILY" Type="Int32" />
+          <Property Name="MORIA_REREGISTER" Type="Int32" />
+          <Property Name="MORIA_SIBLING" Type="Int32" />
+          <Property Name="MORIA_TOTAL" Type="Int32" />
+          <Property Name="WORKING_MOTHER" Type="Int32" Nullable="false" />
+          <Property Name="INCOME_AMOUNT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RANKING" Type="Int32" />
+          <Property Name="RANKING_TEXT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APOKLEISMOS_AITIA" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sqlCHILDREN_POPULATOR">
+          <Key>
+            <PropertyRef Name="CHILD_ID" />
+          </Key>
+          <Property Name="CHILD_ID" Type="Int32" Nullable="false" />
+          <Property Name="FULLNAME" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_AITISIS_CHILDREN">
+          <End Type="HermesDBModel.CHILDREN" Role="CHILDREN" Multiplicity="0..1" />
+          <End Type="HermesDBModel.AITISIS" Role="AITISIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CHILDREN">
+              <PropertyRef Name="CHILD_ID" />
+            </Principal>
+            <Dependent Role="AITISIS">
+              <PropertyRef Name="CHILD_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sqlUPLOADED_FILES">
+          <Key>
+            <PropertyRef Name="FILE_ID" />
+          </Key>
+          <Property Name="FILE_ID" Type="Guid" Nullable="false" />
+          <Property Name="PROSKLISI_ID" Type="Int32" />
+          <Property Name="AITISI_ID" Type="Int32" />
+          <Property Name="STATION_ID" Type="Int32" />
+          <Property Name="UPLOAD_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UPLOAD_SUMMARY" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FILENAME" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="EXTENSION" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="STATION_USER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCHOOLYEAR_TEXT" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SUPPORT">
+          <Key>
+            <PropertyRef Name="SUPPORT_ID" />
+          </Key>
+          <Property Name="SUPPORT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUPPORT_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUPPORT_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sqlPARENT_SELECTOR">
+          <Key>
+            <PropertyRef Name="PARENTS_ID" />
+          </Key>
+          <Property Name="PARENTS_ID" Type="Int32" Nullable="false" />
+          <Property Name="PARENT_FULLNAME" Type="String" MaxLength="201" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HermesDBModelStoreContainer" CdmEntityContainer="HermesDBEntities" >
+          <EntitySetMapping Name="APP_STATUS">
+            <EntityTypeMapping TypeName="HermesDBModel.APP_STATUS">
+              <MappingFragment StoreEntitySet="APP_STATUS">
+                <ScalarProperty Name="PARENT_ENABLE" ColumnName="PARENT_ENABLE" />
+                <ScalarProperty Name="STATUS_MESSAGE" ColumnName="STATUS_MESSAGE" />
+                <ScalarProperty Name="LOCAL_TEST" ColumnName="LOCAL_TEST" />
+                <ScalarProperty Name="STATUS_VALUE" ColumnName="STATUS_VALUE" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_GENDERS">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_GENDERS">
+              <MappingFragment StoreEntitySet="SYS_GENDERS">
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="GENDER_ID" ColumnName="GENDER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_DIMOS">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_DIMOS">
+              <MappingFragment StoreEntitySet="SYS_DIMOS">
+                <ScalarProperty Name="DIMOS_PERIFERIA" ColumnName="DIMOS_PERIFERIA" />
+                <ScalarProperty Name="DIMOS" ColumnName="DIMOS" />
+                <ScalarProperty Name="DIMOS_ID" ColumnName="DIMOS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_PERIFERIES">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_PERIFERIES">
+              <MappingFragment StoreEntitySet="SYS_PERIFERIES">
+                <ScalarProperty Name="PERIFERIA_NAME" ColumnName="PERIFERIA_NAME" />
+                <ScalarProperty Name="PERIFERIA_ID" ColumnName="PERIFERIA_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_STATIONS">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_STATIONS">
+              <MappingFragment StoreEntitySet="SYS_STATIONS">
+                <ScalarProperty Name="ΣΥΜΜΕΤΟΧΗ" ColumnName="ΣΥΜΜΕΤΟΧΗ" />
+                <ScalarProperty Name="ΚΙΝΗΤΟ" ColumnName="ΚΙΝΗΤΟ" />
+                <ScalarProperty Name="ΥΠΕΥΘΥΝΟΣ_ΦΥΛΟ" ColumnName="ΥΠΕΥΘΥΝΟΣ_ΦΥΛΟ" />
+                <ScalarProperty Name="ΥΠΕΥΘΥΝΟΣ" ColumnName="ΥΠΕΥΘΥΝΟΣ" />
+                <ScalarProperty Name="ΠΕΡΙΦΕΡΕΙΑ" ColumnName="ΠΕΡΙΦΕΡΕΙΑ" />
+                <ScalarProperty Name="ΠΕΡΙΦΕΡΕΙΑΚΗ" ColumnName="ΠΕΡΙΦΕΡΕΙΑΚΗ" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ΦΑΞ" ColumnName="ΦΑΞ" />
+                <ScalarProperty Name="ΤΗΛΕΦΩΝΑ" ColumnName="ΤΗΛΕΦΩΝΑ" />
+                <ScalarProperty Name="ΓΡΑΜΜΑΤΕΙΑ" ColumnName="ΓΡΑΜΜΑΤΕΙΑ" />
+                <ScalarProperty Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" ColumnName="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" />
+                <ScalarProperty Name="ΕΠΩΝΥΜΙΑ" ColumnName="ΕΠΩΝΥΜΙΑ" />
+                <ScalarProperty Name="ΣΤΑΘΜΟΣ_ΚΩΔ" ColumnName="ΣΤΑΘΜΟΣ_ΚΩΔ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ADMINS">
+            <EntityTypeMapping TypeName="HermesDBModel.USER_ADMINS">
+              <MappingFragment StoreEntitySet="USER_ADMINS">
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_STATIONS">
+            <EntityTypeMapping TypeName="HermesDBModel.USER_STATIONS">
+              <MappingFragment StoreEntitySet="USER_STATIONS">
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlUSER_STATION">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlUSER_STATION">
+              <MappingFragment StoreEntitySet="sqlUSER_STATION">
+                <ScalarProperty Name="ΕΠΩΝΥΜΙΑ" ColumnName="ΕΠΩΝΥΜΙΑ" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_PARENTS">
+            <EntityTypeMapping TypeName="HermesDBModel.USER_PARENTS">
+              <MappingFragment StoreEntitySet="USER_PARENTS">
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="PARENT_TYPE" ColumnName="PARENT_TYPE" />
+                <ScalarProperty Name="USER_AFM" ColumnName="USER_AFM" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARENT_TYPES">
+            <EntityTypeMapping TypeName="HermesDBModel.PARENT_TYPES">
+              <MappingFragment StoreEntitySet="PARENT_TYPES">
+                <ScalarProperty Name="PARENT_TYPETEXT" ColumnName="PARENT_TYPETEXT" />
+                <ScalarProperty Name="PARENT_TYPEID" ColumnName="PARENT_TYPEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_SCHOOLYEARS">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_SCHOOLYEARS">
+              <MappingFragment StoreEntitySet="SYS_SCHOOLYEARS">
+                <ScalarProperty Name="SY_DATEEND" ColumnName="SY_DATEEND" />
+                <ScalarProperty Name="SY_DATESTART" ColumnName="SY_DATESTART" />
+                <ScalarProperty Name="SY_TEXT" ColumnName="SY_TEXT" />
+                <ScalarProperty Name="SY_ID" ColumnName="SY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROSKLISIS_STATUS">
+            <EntityTypeMapping TypeName="HermesDBModel.PROSKLISIS_STATUS">
+              <MappingFragment StoreEntitySet="PROSKLISIS_STATUS">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="STATUS_ID" ColumnName="STATUS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_PERIFERIAKES">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_PERIFERIAKES">
+              <MappingFragment StoreEntitySet="SYS_PERIFERIAKES">
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="ΤΗΛΕΦΩΝΑ" ColumnName="ΤΗΛΕΦΩΝΑ" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ΤΜΗΜΑ" ColumnName="ΤΜΗΜΑ" />
+                <ScalarProperty Name="ΕΔΡΑ" ColumnName="ΕΔΡΑ" />
+                <ScalarProperty Name="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" ColumnName="ΤΑΧ_ΔΙΕΥΘΥΝΣΗ" />
+                <ScalarProperty Name="ΠΕΡΙΦ_ΣΥΝΤΟΜΟΓΡΑΦΙΑ" ColumnName="ΠΕΡΙΦ_ΣΥΝΤΟΜΟΓΡΑΦΙΑ" />
+                <ScalarProperty Name="ΕΠΩΝΥΜΙΑ_ΠΕΡΙΦΕΡΕΙΑ" ColumnName="ΕΠΩΝΥΜΙΑ_ΠΕΡΙΦΕΡΕΙΑ" />
+                <ScalarProperty Name="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" ColumnName="ΚΩΔΙΚΟΣ_ΠΕΡΙΦΕΡΕΙΑ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAMILY_STATUS">
+            <EntityTypeMapping TypeName="HermesDBModel.FAMILY_STATUS">
+              <MappingFragment StoreEntitySet="FAMILY_STATUS">
+                <ScalarProperty Name="FSTATUS_TEXT" ColumnName="FSTATUS_TEXT" />
+                <ScalarProperty Name="FSTATUS_ID" ColumnName="FSTATUS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_NATIONALITIES">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_NATIONALITIES">
+              <MappingFragment StoreEntitySet="SYS_NATIONALITIES">
+                <ScalarProperty Name="NATIONALITY_TEXT" ColumnName="NATIONALITY_TEXT" />
+                <ScalarProperty Name="NATIONALITY_ID" ColumnName="NATIONALITY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARENTS">
+            <EntityTypeMapping TypeName="HermesDBModel.PARENTS">
+              <MappingFragment StoreEntitySet="PARENTS">
+                <ScalarProperty Name="PARENT_USERID" ColumnName="PARENT_USERID" />
+                <ScalarProperty Name="CHILD_EPIMELEIA" ColumnName="CHILD_EPIMELEIA" />
+                <ScalarProperty Name="FAMILY_STATUS" ColumnName="FAMILY_STATUS" />
+                <ScalarProperty Name="MOTHER_PERMIT" ColumnName="MOTHER_PERMIT" />
+                <ScalarProperty Name="FATHER_PERMIT" ColumnName="FATHER_PERMIT" />
+                <ScalarProperty Name="MOTHER_EMAIL" ColumnName="MOTHER_EMAIL" />
+                <ScalarProperty Name="FATHER_EMAIL" ColumnName="FATHER_EMAIL" />
+                <ScalarProperty Name="MOTHER_PHONEMOBILE" ColumnName="MOTHER_PHONEMOBILE" />
+                <ScalarProperty Name="MOTHER_PHONEWORK" ColumnName="MOTHER_PHONEWORK" />
+                <ScalarProperty Name="MOTHER_PHONEHOME" ColumnName="MOTHER_PHONEHOME" />
+                <ScalarProperty Name="FATHER_PHONEMOBILE" ColumnName="FATHER_PHONEMOBILE" />
+                <ScalarProperty Name="FATHER_PHONEWORK" ColumnName="FATHER_PHONEWORK" />
+                <ScalarProperty Name="FATHER_PHONEHOME" ColumnName="FATHER_PHONEHOME" />
+                <ScalarProperty Name="MOTHER_ADDRESS" ColumnName="MOTHER_ADDRESS" />
+                <ScalarProperty Name="FATHER_ADDRESS" ColumnName="FATHER_ADDRESS" />
+                <ScalarProperty Name="MOTHER_PASSPORT" ColumnName="MOTHER_PASSPORT" />
+                <ScalarProperty Name="FATHER_PASSPORT" ColumnName="FATHER_PASSPORT" />
+                <ScalarProperty Name="MOTHER_ADT" ColumnName="MOTHER_ADT" />
+                <ScalarProperty Name="FATHER_ADT" ColumnName="FATHER_ADT" />
+                <ScalarProperty Name="MOTHER_AMKA" ColumnName="MOTHER_AMKA" />
+                <ScalarProperty Name="FATHER_AMKA" ColumnName="FATHER_AMKA" />
+                <ScalarProperty Name="MOTHER_AFM" ColumnName="MOTHER_AFM" />
+                <ScalarProperty Name="FATHER_AFM" ColumnName="FATHER_AFM" />
+                <ScalarProperty Name="MOTHER_LASTNAME" ColumnName="MOTHER_LASTNAME" />
+                <ScalarProperty Name="MOTHER_FIRSTNAME" ColumnName="MOTHER_FIRSTNAME" />
+                <ScalarProperty Name="FATHER_LASTNAME" ColumnName="FATHER_LASTNAME" />
+                <ScalarProperty Name="FATHER_FIRSTNAME" ColumnName="FATHER_FIRSTNAME" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlCHILD_SELECTOR">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlCHILD_SELECTOR">
+              <MappingFragment StoreEntitySet="sqlCHILD_SELECTOR">
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UPLOADS">
+            <EntityTypeMapping TypeName="HermesDBModel.UPLOADS">
+              <MappingFragment StoreEntitySet="UPLOADS">
+                <ScalarProperty Name="UPLOAD_SUMMARY" ColumnName="UPLOAD_SUMMARY" />
+                <ScalarProperty Name="UPLOAD_NAME" ColumnName="UPLOAD_NAME" />
+                <ScalarProperty Name="UPLOAD_DATE" ColumnName="UPLOAD_DATE" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PARENT_ID" ColumnName="PARENT_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="UPLOAD_ID" ColumnName="UPLOAD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UPLOADS_FILES">
+            <EntityTypeMapping TypeName="HermesDBModel.UPLOADS_FILES">
+              <MappingFragment StoreEntitySet="UPLOADS_FILES">
+                <ScalarProperty Name="UPLOAD_ID" ColumnName="UPLOAD_ID" />
+                <ScalarProperty Name="EXTENSION" ColumnName="EXTENSION" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="SCHOOLYEAR_TEXT" ColumnName="SCHOOLYEAR_TEXT" />
+                <ScalarProperty Name="STATION_USER" ColumnName="STATION_USER" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOB_SECTORS">
+            <EntityTypeMapping TypeName="HermesDBModel.JOB_SECTORS">
+              <MappingFragment StoreEntitySet="JOB_SECTORS">
+                <ScalarProperty Name="JOBSECTOR_TEXT" ColumnName="JOBSECTOR_TEXT" />
+                <ScalarProperty Name="JOBSECTOR_ID" ColumnName="JOBSECTOR_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlPARENT_INFO">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlPARENT_INFO">
+              <MappingFragment StoreEntitySet="sqlPARENT_INFO">
+                <ScalarProperty Name="MOTHER_EMAIL" ColumnName="MOTHER_EMAIL" />
+                <ScalarProperty Name="FATHER_EMAIL" ColumnName="FATHER_EMAIL" />
+                <ScalarProperty Name="MOTHER_ADDRESS" ColumnName="MOTHER_ADDRESS" />
+                <ScalarProperty Name="FATHER_ADDRESS" ColumnName="FATHER_ADDRESS" />
+                <ScalarProperty Name="PARENT_TYPETEXT" ColumnName="PARENT_TYPETEXT" />
+                <ScalarProperty Name="FSTATUS_TEXT" ColumnName="FSTATUS_TEXT" />
+                <ScalarProperty Name="MOTHER_PHONEWORK" ColumnName="MOTHER_PHONEWORK" />
+                <ScalarProperty Name="MOTHER_PHONEMOBILE" ColumnName="MOTHER_PHONEMOBILE" />
+                <ScalarProperty Name="MOTHER_PHONEHOME" ColumnName="MOTHER_PHONEHOME" />
+                <ScalarProperty Name="FATHER_PHONEWORK" ColumnName="FATHER_PHONEWORK" />
+                <ScalarProperty Name="FATHER_PHONEMOBILE" ColumnName="FATHER_PHONEMOBILE" />
+                <ScalarProperty Name="FATHER_PHONEHOME" ColumnName="FATHER_PHONEHOME" />
+                <ScalarProperty Name="MOTHER_AMKA" ColumnName="MOTHER_AMKA" />
+                <ScalarProperty Name="FATHER_AMKA" ColumnName="FATHER_AMKA" />
+                <ScalarProperty Name="MOTHER_AFM" ColumnName="MOTHER_AFM" />
+                <ScalarProperty Name="FATHER_AFM" ColumnName="FATHER_AFM" />
+                <ScalarProperty Name="MOTHER_FULLNAME" ColumnName="MOTHER_FULLNAME" />
+                <ScalarProperty Name="FATHER_FULLNAME" ColumnName="FATHER_FULLNAME" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NUMBERS">
+            <EntityTypeMapping TypeName="HermesDBModel.NUMBERS">
+              <MappingFragment StoreEntitySet="NUMBERS">
+                <ScalarProperty Name="NUMBER" ColumnName="NUMBER" />
+                <ScalarProperty Name="NUMBER_ID" ColumnName="NUMBER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SYS_YESNO">
+            <EntityTypeMapping TypeName="HermesDBModel.SYS_YESNO">
+              <MappingFragment StoreEntitySet="SYS_YESNO">
+                <ScalarProperty Name="YESNO_TEXT" ColumnName="YESNO_TEXT" />
+                <ScalarProperty Name="YESNO_ID" ColumnName="YESNO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gridPARENT_DATA">
+            <EntityTypeMapping TypeName="HermesDBModel.gridPARENT_DATA">
+              <MappingFragment StoreEntitySet="gridPARENT_DATA">
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="MOTHER_PHONEMOBILE" ColumnName="MOTHER_PHONEMOBILE" />
+                <ScalarProperty Name="MOTHER_PHONEWORK" ColumnName="MOTHER_PHONEWORK" />
+                <ScalarProperty Name="MOTHER_PHONEHOME" ColumnName="MOTHER_PHONEHOME" />
+                <ScalarProperty Name="FATHER_PHONEMOBILE" ColumnName="FATHER_PHONEMOBILE" />
+                <ScalarProperty Name="FATHER_PHONEWORK" ColumnName="FATHER_PHONEWORK" />
+                <ScalarProperty Name="FATHER_PHONEHOME" ColumnName="FATHER_PHONEHOME" />
+                <ScalarProperty Name="MOTHER_FULLNAME" ColumnName="MOTHER_FULLNAME" />
+                <ScalarProperty Name="FATHER_FULLNAME" ColumnName="FATHER_FULLNAME" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gridAITISEIS_DATA">
+            <EntityTypeMapping TypeName="HermesDBModel.gridAITISEIS_DATA">
+              <MappingFragment StoreEntitySet="gridAITISEIS_DATA">
+                <ScalarProperty Name="AGE_CATEGORY" ColumnName="AGE_CATEGORY" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="SY_TEXT" ColumnName="SY_TEXT" />
+                <ScalarProperty Name="SCHOOL_YEAR" ColumnName="SCHOOL_YEAR" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PROTOCOL" ColumnName="PROTOCOL" />
+                <ScalarProperty Name="AITISI_DATE" ColumnName="AITISI_DATE" />
+                <ScalarProperty Name="AITISI_PROTOCOL" ColumnName="AITISI_PROTOCOL" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gridSTATEMENT_DATA">
+            <EntityTypeMapping TypeName="HermesDBModel.gridSTATEMENT_DATA">
+              <MappingFragment StoreEntitySet="gridSTATEMENT_DATA">
+                <ScalarProperty Name="MOTHER_JOBSECTOR" ColumnName="MOTHER_JOBSECTOR" />
+                <ScalarProperty Name="FATHER_JOBSECTOR" ColumnName="FATHER_JOBSECTOR" />
+                <ScalarProperty Name="MOTHER_FULLNAME" ColumnName="MOTHER_FULLNAME" />
+                <ScalarProperty Name="FATHER_FULLNAME" ColumnName="FATHER_FULLNAME" />
+                <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="SY_TEXT" ColumnName="SY_TEXT" />
+                <ScalarProperty Name="PROTOCOL" ColumnName="PROTOCOL" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="STATEMENT_DATE" ColumnName="STATEMENT_DATE" />
+                <ScalarProperty Name="STATEMENT_ID" ColumnName="STATEMENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlAPPLICANT_INFO">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlAPPLICANT_INFO">
+              <MappingFragment StoreEntitySet="sqlAPPLICANT_INFO">
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="PARENT_PHONEMOBILE" ColumnName="PARENT_PHONEMOBILE" />
+                <ScalarProperty Name="PARENT_PHONEWORK" ColumnName="PARENT_PHONEWORK" />
+                <ScalarProperty Name="PARENT_PHONEHOME" ColumnName="PARENT_PHONEHOME" />
+                <ScalarProperty Name="PARENT_AMKA" ColumnName="PARENT_AMKA" />
+                <ScalarProperty Name="PARENT_AFM" ColumnName="PARENT_AFM" />
+                <ScalarProperty Name="PARENT_FULLNAME" ColumnName="PARENT_FULLNAME" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="gridUSER_PARENTS">
+            <EntityTypeMapping TypeName="HermesDBModel.gridUSER_PARENTS">
+              <MappingFragment StoreEntitySet="gridUSER_PARENTS">
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="PARENT_TYPE" ColumnName="PARENT_TYPE" />
+                <ScalarProperty Name="USER_AFM" ColumnName="USER_AFM" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlCHILDREN_DATA">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlCHILDREN_DATA">
+              <MappingFragment StoreEntitySet="sqlCHILDREN_DATA">
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PARENT_FULLNAME" ColumnName="PARENT_FULLNAME" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="AMKA" ColumnName="AMKA" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAXISNET">
+            <EntityTypeMapping TypeName="HermesDBModel.TAXISNET">
+              <MappingFragment StoreEntitySet="TAXISNET">
+                <ScalarProperty Name="TAXISNET_AFM" ColumnName="TAXISNET_AFM" />
+                <ScalarProperty Name="RANDOM_NUMBER" ColumnName="RANDOM_NUMBER" />
+                <ScalarProperty Name="TAXISNET_ID" ColumnName="TAXISNET_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlUSER_PARENT_SELECT">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlUSER_PARENT_SELECT">
+              <MappingFragment StoreEntitySet="sqlUSER_PARENT_SELECT">
+                <ScalarProperty Name="PARENT_FULLNAME" ColumnName="PARENT_FULLNAME" />
+                <ScalarProperty Name="CREATEDATE" ColumnName="CREATEDATE" />
+                <ScalarProperty Name="PARENT_TYPETEXT" ColumnName="PARENT_TYPETEXT" />
+                <ScalarProperty Name="USER_AFM" ColumnName="USER_AFM" />
+                <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAMILY_INCOME">
+            <EntityTypeMapping TypeName="HermesDBModel.FAMILY_INCOME">
+              <MappingFragment StoreEntitySet="FAMILY_INCOME">
+                <ScalarProperty Name="INCOME_MORIA" ColumnName="INCOME_MORIA" />
+                <ScalarProperty Name="INCOME_TEXT" ColumnName="INCOME_TEXT" />
+                <ScalarProperty Name="INCOME_ID" ColumnName="INCOME_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mor_AITISI_DATA">
+            <EntityTypeMapping TypeName="HermesDBModel.mor_AITISI_DATA">
+              <MappingFragment StoreEntitySet="mor_AITISI_DATA">
+                <ScalarProperty Name="WORKING_MOTHER" ColumnName="WORKING_MOTHER" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="SIBLING_IN_BNS" ColumnName="SIBLING_IN_BNS" />
+                <ScalarProperty Name="RE_REGISTRATION" ColumnName="RE_REGISTRATION" />
+                <ScalarProperty Name="CHILDREN_NUMBER" ColumnName="CHILDREN_NUMBER" />
+                <ScalarProperty Name="PARENT_INARMY" ColumnName="PARENT_INARMY" />
+                <ScalarProperty Name="PARENT_DIVORCED" ColumnName="PARENT_DIVORCED" />
+                <ScalarProperty Name="CHILD_ORPHAN" ColumnName="CHILD_ORPHAN" />
+                <ScalarProperty Name="CHILD_AMEA" ColumnName="CHILD_AMEA" />
+                <ScalarProperty Name="MOTHER_DISABILITY" ColumnName="MOTHER_DISABILITY" />
+                <ScalarProperty Name="FATHER_DISABILITY" ColumnName="FATHER_DISABILITY" />
+                <ScalarProperty Name="DIKAIOYXOI_BOTH" ColumnName="DIKAIOYXOI_BOTH" />
+                <ScalarProperty Name="FAMILY_INCOME" ColumnName="FAMILY_INCOME" />
+                <ScalarProperty Name="MOTHER_EPIDOMA" ColumnName="MOTHER_EPIDOMA" />
+                <ScalarProperty Name="FATHER_EPIDOMA" ColumnName="FATHER_EPIDOMA" />
+                <ScalarProperty Name="MOTHER_JOBSECTOR" ColumnName="MOTHER_JOBSECTOR" />
+                <ScalarProperty Name="FATHER_JOBSECTOR" ColumnName="FATHER_JOBSECTOR" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mor_AITISI_MORIA">
+            <EntityTypeMapping TypeName="HermesDBModel.mor_AITISI_MORIA">
+              <MappingFragment StoreEntitySet="mor_AITISI_MORIA">
+                <ScalarProperty Name="RANKING" ColumnName="RANKING" />
+                <ScalarProperty Name="MORIA_TOTAL" ColumnName="MORIA_TOTAL" />
+                <ScalarProperty Name="MORIA_SIBLING" ColumnName="MORIA_SIBLING" />
+                <ScalarProperty Name="MORIA_REREGISTER" ColumnName="MORIA_REREGISTER" />
+                <ScalarProperty Name="MORIA_FAMILY" ColumnName="MORIA_FAMILY" />
+                <ScalarProperty Name="MORIA_INCOME" ColumnName="MORIA_INCOME" />
+                <ScalarProperty Name="MORIA_OAED" ColumnName="MORIA_OAED" />
+                <ScalarProperty Name="MORIA_SOCIAL" ColumnName="MORIA_SOCIAL" />
+                <ScalarProperty Name="CHILD_NAME" ColumnName="CHILD_NAME" />
+                <ScalarProperty Name="CHILD_AMKA" ColumnName="CHILD_AMKA" />
+                <ScalarProperty Name="AITISI_PROTOCOL" ColumnName="AITISI_PROTOCOL" />
+                <ScalarProperty Name="PROSKLISI_PROTOCOL" ColumnName="PROSKLISI_PROTOCOL" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RANKINGS">
+            <EntityTypeMapping TypeName="HermesDBModel.RANKINGS">
+              <MappingFragment StoreEntitySet="RANKINGS">
+                <ScalarProperty Name="RANKING_TEXT" ColumnName="RANKING_TEXT" />
+                <ScalarProperty Name="RANKING_ID" ColumnName="RANKING_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlAITISEIS_LIST">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlAITISEIS_LIST">
+              <MappingFragment StoreEntitySet="sqlAITISEIS_LIST">
+                <ScalarProperty Name="AGE_CATEGORY" ColumnName="AGE_CATEGORY" />
+                <ScalarProperty Name="RANKING_TEXT" ColumnName="RANKING_TEXT" />
+                <ScalarProperty Name="MORIA_TOTAL" ColumnName="MORIA_TOTAL" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="CHILD_FULLNAME" ColumnName="CHILD_FULLNAME" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="STATION_NAME" ColumnName="STATION_NAME" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="AITISI_PROTOCOL" ColumnName="AITISI_PROTOCOL" />
+                <ScalarProperty Name="AITISI_DATE" ColumnName="AITISI_DATE" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="mor_CHILD_INFO">
+            <EntityTypeMapping TypeName="HermesDBModel.mor_CHILD_INFO">
+              <MappingFragment StoreEntitySet="mor_CHILD_INFO">
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="AMKA" ColumnName="AMKA" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AGE_CLASSES">
+            <EntityTypeMapping TypeName="HermesDBModel.AGE_CLASSES">
+              <MappingFragment StoreEntitySet="AGE_CLASSES">
+                <ScalarProperty Name="AGE_END" ColumnName="AGE_END" />
+                <ScalarProperty Name="AGE_START" ColumnName="AGE_START" />
+                <ScalarProperty Name="CATEGORY_TEXT" ColumnName="CATEGORY_TEXT" />
+                <ScalarProperty Name="CATEGORY_ID" ColumnName="CATEGORY_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHILDREN">
+            <EntityTypeMapping TypeName="HermesDBModel.CHILDREN">
+              <MappingFragment StoreEntitySet="CHILDREN">
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="NATIONALITY" ColumnName="NATIONALITY" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+                <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="AMKA" ColumnName="AMKA" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROSKLISIS">
+            <EntityTypeMapping TypeName="HermesDBModel.PROSKLISIS">
+              <MappingFragment StoreEntitySet="PROSKLISIS">
+                <ScalarProperty Name="HOUR_END" ColumnName="HOUR_END" />
+                <ScalarProperty Name="HOUR_START" ColumnName="HOUR_START" />
+                <ScalarProperty Name="USERVIEW" ColumnName="USERVIEW" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="DIOIKITIS" ColumnName="DIOIKITIS" />
+                <ScalarProperty Name="DATE_END" ColumnName="DATE_END" />
+                <ScalarProperty Name="DATE_START" ColumnName="DATE_START" />
+                <ScalarProperty Name="SCHOOL_YEAR" ColumnName="SCHOOL_YEAR" />
+                <ScalarProperty Name="PROTOCOL" ColumnName="PROTOCOL" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATEMENTS">
+            <EntityTypeMapping TypeName="HermesDBModel.STATEMENTS">
+              <MappingFragment StoreEntitySet="STATEMENTS">
+                <ScalarProperty Name="SIBLING_IN_BNS" ColumnName="SIBLING_IN_BNS" />
+                <ScalarProperty Name="RE_REGISTRATION" ColumnName="RE_REGISTRATION" />
+                <ScalarProperty Name="CHILDREN_MINOR" ColumnName="CHILDREN_MINOR" />
+                <ScalarProperty Name="PARENT_INARMY" ColumnName="PARENT_INARMY" />
+                <ScalarProperty Name="PARENT_DIVORCED" ColumnName="PARENT_DIVORCED" />
+                <ScalarProperty Name="CHILD_ORPHAN" ColumnName="CHILD_ORPHAN" />
+                <ScalarProperty Name="CHILD_AMEA" ColumnName="CHILD_AMEA" />
+                <ScalarProperty Name="MOTHER_DISABILITY" ColumnName="MOTHER_DISABILITY" />
+                <ScalarProperty Name="FATHER_DISABILITY" ColumnName="FATHER_DISABILITY" />
+                <ScalarProperty Name="DIKAIOYXOI_BOTH" ColumnName="DIKAIOYXOI_BOTH" />
+                <ScalarProperty Name="INCOME_FAMILY" ColumnName="INCOME_FAMILY" />
+                <ScalarProperty Name="INCOME_CATEGORY" ColumnName="INCOME_CATEGORY" />
+                <ScalarProperty Name="MOTHER_EPIDOMA" ColumnName="MOTHER_EPIDOMA" />
+                <ScalarProperty Name="MOTHER_DELTIOANERGIA" ColumnName="MOTHER_DELTIOANERGIA" />
+                <ScalarProperty Name="MOTHER_AMA" ColumnName="MOTHER_AMA" />
+                <ScalarProperty Name="MOTHER_JOBSECTOR" ColumnName="MOTHER_JOBSECTOR" />
+                <ScalarProperty Name="FATHER_EPIDOMA" ColumnName="FATHER_EPIDOMA" />
+                <ScalarProperty Name="FATHER_DELTIOANERGIA" ColumnName="FATHER_DELTIOANERGIA" />
+                <ScalarProperty Name="FATHER_AMA" ColumnName="FATHER_AMA" />
+                <ScalarProperty Name="FATHER_JOBSECTOR" ColumnName="FATHER_JOBSECTOR" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="STATEMENT_DATE" ColumnName="STATEMENT_DATE" />
+                <ScalarProperty Name="STATEMENT_ID" ColumnName="STATEMENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AITISIS">
+            <EntityTypeMapping TypeName="HermesDBModel.AITISIS">
+              <MappingFragment StoreEntitySet="AITISIS">
+                <ScalarProperty Name="RE_REGISTRATION" ColumnName="RE_REGISTRATION" />
+                <ScalarProperty Name="EPITROPI2_TEXT" ColumnName="EPITROPI2_TEXT" />
+                <ScalarProperty Name="EPITROPI1_TEXT" ColumnName="EPITROPI1_TEXT" />
+                <ScalarProperty Name="APOKLEISMOS_AITIA" ColumnName="APOKLEISMOS_AITIA" />
+                <ScalarProperty Name="ENSTASI" ColumnName="ENSTASI" />
+                <ScalarProperty Name="RANKING" ColumnName="RANKING" />
+                <ScalarProperty Name="MORIA_TOTAL" ColumnName="MORIA_TOTAL" />
+                <ScalarProperty Name="MORIA_SIBLING" ColumnName="MORIA_SIBLING" />
+                <ScalarProperty Name="MORIA_REREGISTER" ColumnName="MORIA_REREGISTER" />
+                <ScalarProperty Name="MORIA_FAMILY" ColumnName="MORIA_FAMILY" />
+                <ScalarProperty Name="MORIA_INCOME" ColumnName="MORIA_INCOME" />
+                <ScalarProperty Name="MORIA_OAED" ColumnName="MORIA_OAED" />
+                <ScalarProperty Name="MORIA_SOCIAL" ColumnName="MORIA_SOCIAL" />
+                <ScalarProperty Name="AGE_CATEGORY" ColumnName="AGE_CATEGORY" />
+                <ScalarProperty Name="AGE" ColumnName="AGE" />
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="AITISI_PROTOCOL" ColumnName="AITISI_PROTOCOL" />
+                <ScalarProperty Name="AITISI_DATE" ColumnName="AITISI_DATE" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rep_AITISI_INFO_MORIA">
+            <EntityTypeMapping TypeName="HermesDBModel.rep_AITISI_INFO_MORIA">
+              <MappingFragment StoreEntitySet="rep_AITISI_INFO_MORIA">
+                <ScalarProperty Name="APOKLEISMOS_AITIA" ColumnName="APOKLEISMOS_AITIA" />
+                <ScalarProperty Name="RANKING_TEXT" ColumnName="RANKING_TEXT" />
+                <ScalarProperty Name="RANKING" ColumnName="RANKING" />
+                <ScalarProperty Name="INCOME_AMOUNT" ColumnName="INCOME_AMOUNT" />
+                <ScalarProperty Name="WORKING_MOTHER" ColumnName="WORKING_MOTHER" />
+                <ScalarProperty Name="MORIA_TOTAL" ColumnName="MORIA_TOTAL" />
+                <ScalarProperty Name="MORIA_SIBLING" ColumnName="MORIA_SIBLING" />
+                <ScalarProperty Name="MORIA_REREGISTER" ColumnName="MORIA_REREGISTER" />
+                <ScalarProperty Name="MORIA_FAMILY" ColumnName="MORIA_FAMILY" />
+                <ScalarProperty Name="MORIA_INCOME" ColumnName="MORIA_INCOME" />
+                <ScalarProperty Name="MORIA_OAED" ColumnName="MORIA_OAED" />
+                <ScalarProperty Name="MORIA_SOCIAL" ColumnName="MORIA_SOCIAL" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+                <ScalarProperty Name="SIBLING_IN_BNS" ColumnName="SIBLING_IN_BNS" />
+                <ScalarProperty Name="RE_REGISTRATION" ColumnName="RE_REGISTRATION" />
+                <ScalarProperty Name="CHILDREN_NUMBER" ColumnName="CHILDREN_NUMBER" />
+                <ScalarProperty Name="INCOME_TEXT" ColumnName="INCOME_TEXT" />
+                <ScalarProperty Name="DIKAIOYXOI_BOTH" ColumnName="DIKAIOYXOI_BOTH" />
+                <ScalarProperty Name="PARENT_INARMY" ColumnName="PARENT_INARMY" />
+                <ScalarProperty Name="PARENT_DIVORCED" ColumnName="PARENT_DIVORCED" />
+                <ScalarProperty Name="CHILD_ORPHAN" ColumnName="CHILD_ORPHAN" />
+                <ScalarProperty Name="CHILD_AMEA" ColumnName="CHILD_AMEA" />
+                <ScalarProperty Name="MOTHER_DISABILITY" ColumnName="MOTHER_DISABILITY" />
+                <ScalarProperty Name="FATHER_DISABILITY" ColumnName="FATHER_DISABILITY" />
+                <ScalarProperty Name="AGE_CLASS" ColumnName="AGE_CLASS" />
+                <ScalarProperty Name="AGE_CLASS_ID" ColumnName="AGE_CLASS_ID" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="AMKA" ColumnName="AMKA" />
+                <ScalarProperty Name="AITISI_PROTOCOL" ColumnName="AITISI_PROTOCOL" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlCHILDREN_POPULATOR">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlCHILDREN_POPULATOR">
+              <MappingFragment StoreEntitySet="sqlCHILDREN_POPULATOR">
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="FULLNAME" ColumnName="FULLNAME" />
+                <ScalarProperty Name="CHILD_ID" ColumnName="CHILD_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlUPLOADED_FILES">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlUPLOADED_FILES">
+              <MappingFragment StoreEntitySet="sqlUPLOADED_FILES">
+                <ScalarProperty Name="SCHOOLYEAR_TEXT" ColumnName="SCHOOLYEAR_TEXT" />
+                <ScalarProperty Name="STATION_USER" ColumnName="STATION_USER" />
+                <ScalarProperty Name="EXTENSION" ColumnName="EXTENSION" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="UPLOAD_SUMMARY" ColumnName="UPLOAD_SUMMARY" />
+                <ScalarProperty Name="UPLOAD_NAME" ColumnName="UPLOAD_NAME" />
+                <ScalarProperty Name="STATION_ID" ColumnName="STATION_ID" />
+                <ScalarProperty Name="AITISI_ID" ColumnName="AITISI_ID" />
+                <ScalarProperty Name="PROSKLISI_ID" ColumnName="PROSKLISI_ID" />
+                <ScalarProperty Name="FILE_ID" ColumnName="FILE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SUPPORT">
+            <EntityTypeMapping TypeName="HermesDBModel.SUPPORT">
+              <MappingFragment StoreEntitySet="SUPPORT">
+                <ScalarProperty Name="SUPPORT_PHONE" ColumnName="SUPPORT_PHONE" />
+                <ScalarProperty Name="SUPPORT_NAME" ColumnName="SUPPORT_NAME" />
+                <ScalarProperty Name="SUPPORT_ID" ColumnName="SUPPORT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sqlPARENT_SELECTOR">
+            <EntityTypeMapping TypeName="HermesDBModel.sqlPARENT_SELECTOR">
+              <MappingFragment StoreEntitySet="sqlPARENT_SELECTOR">
+                <ScalarProperty Name="PARENT_FULLNAME" ColumnName="PARENT_FULLNAME" />
+                <ScalarProperty Name="PARENTS_ID" ColumnName="PARENTS_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

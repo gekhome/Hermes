@@ -1,0 +1,179 @@
+﻿@model Hermes.Models.ChildrenViewModel
+
+@{
+    Layout = null;
+}
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        /*.control-label {
+            font-family: 'Segoe UI';
+            white-space: pre-line;
+            font-size: 14px
+        }*/
+
+        .k-textbox {
+            display: block;
+            width: 500px;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+            .k-textbox:focus {
+                border-color: #66afe9;
+                outline: 0;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+                box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            }
+    </style>
+</head>
+
+<div class="form-horizontal" style="margin:10px 20px 10px 20px">
+
+    <h4 style="font-weight:bold">Στοιχεία παιδιού</h4>
+    <hr style="width:680px;border-radius:2px;border-color:darkgray" />
+
+     <div class="col-md-11">
+            <div class="col-md-11">
+                @Html.HiddenFor(model => model.CHILD_ID, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+     <table>
+         <tr>
+             <td>
+                 <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                     @Html.LabelFor(model => model.PARENTS_ID, new { @class = "control-label col-md-3" })
+                 </div>
+             </td>
+             <td>
+                 <div class="col-md-8">
+                     @(Html.Kendo().DropDownListFor(model => model.PARENTS_ID)
+                        .Name("PARENTS_ID")
+                        .Enable(false)
+                        .DataTextField("PARENT_FULLNAME")
+                        .DataValueField("PARENTS_ID")
+                        .HtmlAttributes(new { style = "width:480px;" })
+                        .OptionLabel("---Επιλογή---")
+                        .AutoBind(true)
+                        .DataSource(source => { source.Read(read => { read.Action("GetParents", "Station"); }); })
+                     )
+                     @Html.ValidationMessageFor(model => model.GENDER, "", new { @class = "text-danger" })
+                 </div>
+             </td>
+         </tr>
+        <tr>
+            <td>
+                <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                    @Html.LabelFor(model => model.AMKA, new { @class = "control-label col-md-3" })
+                </div>
+            </td>
+            <td>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.AMKA, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AMKA, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                    @Html.LabelFor(model => model.FIRSTNAME, new { @class = "control-label col-md-3" })
+                </div>
+            </td>
+            <td>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.FIRSTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FIRSTNAME, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                    @Html.LabelFor(model => model.LASTNAME, new { @class = "control-label col-md-3" })
+                </div>
+            </td>
+            <td>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.LASTNAME, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LASTNAME, "", new { @class = "text-danger" })
+                </div>
+            </td>
+        </tr>
+         <tr>
+             <td>
+                 <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                     @Html.LabelFor(model => model.BIRTHDATE, new { @class = "control-label col-md-3" })
+                 </div>
+             </td>
+             <td>
+                 <div class="col-md-8">
+                     @Html.EditorFor(model => model.BIRTHDATE, new { htmlAttributes = new { @class = "form-control" } })
+                     @Html.ValidationMessageFor(model => model.BIRTHDATE, "", new { @class = "text-danger" })
+                 </div>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                     @Html.LabelFor(model => model.GENDER, new { @class = "control-label col-md-3" })
+                 </div>
+             </td>
+             <td>
+                 <div class="col-md-8">
+                     @(Html.Kendo().DropDownListFor(model => model.GENDER)
+                        .Name("GENDER")
+                        .DataTextField("GENDER")
+                        .DataValueField("GENDER_ID")
+                        .HtmlAttributes(new { style = "width:300px;" })
+                        .OptionLabel("---Επιλογή---")
+                        .AutoBind(true)
+                        .DataSource(source => { source.Read(read => { read.Action("GetGenders", "Station"); }); })
+                     )
+                     @Html.ValidationMessageFor(model => model.GENDER, "", new { @class = "text-danger" })
+                 </div>
+             </td>
+         </tr>
+         <tr>
+             <td>
+                 <div class="col-md-3" style="margin-bottom:5px;margin-top:5px">
+                     @Html.LabelFor(model => model.NATIONALITY, new { @class = "control-label col-md-3" })
+                 </div>
+             </td>
+             <td>
+                 <div class="col-md-8">
+                     @(Html.Kendo().DropDownListFor(model => model.NATIONALITY)
+                        .Name("NATIONALITY")
+                        .DataTextField("NATIONALITY_TEXT")
+                        .DataValueField("NATIONALITY_ID")
+                        .HtmlAttributes(new { style = "width:300px;" })
+                        .OptionLabel("---Επιλογή---")
+                        .AutoBind(true)
+                        .DataSource(source => { source.Read(read => { read.Action("GetNationalities", "Station"); }); })
+                     )
+                     @Html.ValidationMessageFor(model => model.NATIONALITY, "", new { @class = "text-danger" })
+                 </div>
+             </td>
+         </tr>
+    </table>
+    <p></p>
+    <div class="form-group">
+        <div class="col-md-11">
+            @Html.HiddenFor(model => model.PARENTS_ID, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+</div>

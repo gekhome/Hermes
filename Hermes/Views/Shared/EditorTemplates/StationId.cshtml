@@ -1,0 +1,20 @@
+﻿@using System.Collections
+@using Hermes.Models
+@using Hermes.DAL
+@model int
+
+@(Html.Kendo().DropDownListFor(m => m)
+    .AutoBind(true)
+    .DataValueField("ΣΤΑΘΜΟΣ_ΚΩΔ")
+    .DataTextField("ΕΠΩΝΥΜΙΑ")
+    .OptionLabel("Επιλογή...")
+    .DataSource(source =>
+    {
+        source.Read(read =>
+        {
+            read.Action("GetStations", "Parents");
+        })
+        .ServerFiltering(true);
+    })
+)
+@Html.ValidationMessageFor(m => m)

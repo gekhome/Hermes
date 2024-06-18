@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Hermes.Models.sqlUserParentViewModel>
+@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Λογαριασμοί γονέων";
+    Layout = "~/Views/Shared/_LayoutMin.cshtml";
+}
+
+<style>
+    .k-grid {
+        font-size: 12px;
+    }
+</style>
+
+@Html.AntiForgeryToken()
+<div class="page-header" style="margin:10px 20px 5px 30px">
+    <span style="margin:5px 30px 5px 30px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">Λογαριασμοί γονέων για δοκιμαστική είσοδο</font>
+    </span>
+    <span style="margin:5px 10px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Home", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+    <button class="btn btn-info" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>    
+</div>
+
+<div class="body-content" style="margin:10px 30px 5px 30px">
+    @(Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.USER_AFM).Groupable(false).Width(20);
+            columns.Bound(c => c.CREATEDATE).Groupable(false).Width(22);
+            columns.Bound(c => c.PARENT_TYPETEXT).Width(20);
+            columns.Bound(c => c.PARENT_FULLNAME).Groupable(false).Width(45);
+            columns.Template(@<text></text>)
+            .ClientTemplate(
+            "<a class=\"k-button k-button-icontext\" href='" + Url.Action("RegisterUser", "USER_PARENTS") + "?Afm=#=USER_AFM#'><span class=\"k-icon k-edit\"></span>ΕΙΣΟΔΟΣ</a>"
+            ).Width(20);
+        })
+        .HtmlAttributes(new { style = "display:block;font-size:14px" })
+        .Filterable()
+        .Groupable()
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+        .Scrollable(scr => scr.Height(420))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(10))
+        .DataSource(datasource => datasource
+            .Ajax()
+            .PageSize(60)
+            .ServerOperation(true)
+            .Events(events => events.Error("error_handler"))
+            .Model(model => model.Id(p => p.USER_ID))
+            .Read(read => read.Action("UserParent_Read", "USER_PARENTS"))
+        )
+    )
+</div>
+
+<script type="text/javascript">
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+</script>
+
+
+
+
+

@@ -1,0 +1,147 @@
+﻿@model ParentsInfoViewModel
+@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style scoped="scoped">
+        .k-detail-cell .k-tabstrip .k-content {
+            padding: 0.2em;
+        }
+        .k-grid {
+        font-size: 11px;
+    }
+
+        .parent-details ul {
+            list-style: none;
+            font-style: italic;
+            margin: 15px;
+            padding: 0;
+        }
+
+        .parent-details ul li {
+            margin: 0;
+            line-height: 1.7em;
+        }
+
+        .parent-details label {
+            display: inline-block;
+            width: 200px;
+            padding-right: 10px;
+            text-align: right;
+            font-style: normal;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-content" style="margin:5px 0px 5px 0px;font-size:small;">
+
+        @(Html.Kendo().TabStrip()
+        .Name("TabStrip")
+        .SelectedIndex(0)
+        .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+        .Items(items =>
+        {
+            items.Add().Text("Στοιχεία πατέρα").Content(
+               @<div class="parent-details">
+                    <table>
+                        <tr>
+                            <td style="width:600px">
+                                <ul>
+                                    <li>
+                                        <label>Ονοματεπώνυμο:</label>@Html.DisplayFor(m => m.FATHER_FULLNAME, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>ΑΦΜ:</label>@Html.DisplayFor(m => m.FATHER_AFM, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>ΑΜΚΑ:</label>@Html.DisplayFor(m => m.FATHER_AMKA, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Τηλ. οικίας:</label>@Html.DisplayFor(m => m.FATHER_PHONEHOME, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Κινητό:</label>@Html.DisplayFor(m => m.FATHER_PHONEMOBILE, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Τηλ. εργασίας:</label>@Html.DisplayFor(m => m.FATHER_PHONEWORK, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>E-mail:</label>@Html.DisplayFor(m => m.FATHER_EMAIL, new { @class = "control-label col-md-10" })
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>);
+            items.Add().Text("Στοιχεία μητέρας").Content(
+                @<div class="parent-details">
+                    <table>
+                        <tr>
+                            <td style="width:600px">
+                                <ul>
+                                    <li>
+                                        <label>Ονοματεπώνυμο:</label>@Html.DisplayFor(m => m.MOTHER_FULLNAME, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>ΑΦΜ:</label>@Html.DisplayFor(m => m.MOTHER_AFM, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>ΑΜΚΑ:</label>@Html.DisplayFor(m => m.MOTHER_AMKA, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Τηλ. οικίας:</label>@Html.DisplayFor(m => m.MOTHER_PHONEHOME, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Κινητό:</label>@Html.DisplayFor(m => m.MOTHER_PHONEMOBILE, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>Τηλ. εργασίας:</label>@Html.DisplayFor(m => m.MOTHER_PHONEWORK, new { @class = "control-label col-md-10" })
+                                    </li>
+                                    <li>
+                                        <label>E-mail:</label>@Html.DisplayFor(m => m.MOTHER_EMAIL, new { @class = "control-label col-md-10" })
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                </div>);
+            items.Add().Text("Οικογ. κατάσταση").Content(
+                @<div class="parent-details">
+                     <table>
+                         <tr>
+                             <td style="width:600px">
+                                 <ul>
+                                     <li>
+                                         <label>Διεύθυνση πατέρα:</label>@Html.DisplayFor(m => m.FATHER_ADDRESS, new { @class = "control-label col-md-10" })
+                                     </li>
+                                     <li>
+                                         <label>Διεύθυνση μητέρας:</label>@Html.DisplayFor(m => m.MOTHER_ADDRESS, new { @class = "control-label col-md-10" })
+                                     </li>
+                                     <li>
+                                         <label>Οικογενειακή κατάσταση:</label>@Html.DisplayFor(m => m.FSTATUS_TEXT, new { @class = "control-label col-md-10" })
+                                     </li>
+                                     <li>
+                                         <label>Επιμέλεια παιδιού:</label>@Html.DisplayFor(m => m.PARENT_TYPETEXT, new { @class = "control-label col-md-10" })
+                                     </li>
+
+                                </ul>
+                         </td>
+                         </tr>
+                     </table>
+                </div>);
+        })
+        )   @*-- Tabstrip ---*@
+    </div>
+</body>
+</html>

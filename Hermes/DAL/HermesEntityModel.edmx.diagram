@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0037c256ced544909adffd14fa39e221" Name="Diagram1" ZoomLevel="80" >
+        <EntityTypeShape EntityType="HermesDBModel.APP_STATUS" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_GENDERS" Width="1.5" PointX="2.25" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_DIMOS" Width="1.5" PointX="6.125" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_PERIFERIES" Width="1.5" PointX="4.125" PointY="0.5" />
+        <AssociationConnector Association="HermesDBModel.FK_SYS_DIMOS_SYS_PERIFERIES" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_STATIONS" Width="1.875" PointX="10.875" PointY="2.875" />
+        <EntityTypeShape EntityType="HermesDBModel.USER_ADMINS" Width="1.5" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.USER_STATIONS" Width="1.5" PointX="11.5" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlUSER_STATION" Width="1.75" PointX="15.375" PointY="2.5" />
+        <EntityTypeShape EntityType="HermesDBModel.USER_PARENTS" Width="1.5" PointX="9.75" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.PARENT_TYPES" Width="1.75" PointX="13.25" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_SCHOOLYEARS" Width="1.75" PointX="15.375" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.PROSKLISIS_STATUS" Width="1.75" PointX="17.5" PointY="4.25" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_PERIFERIAKES" Width="1.75" PointX="13.125" PointY="3" />
+        <AssociationConnector Association="HermesDBModel.FK_SYS_STATIONS_SYS_PERIFERIAKES" />
+        <EntityTypeShape EntityType="HermesDBModel.FAMILY_STATUS" Width="1.75" PointX="8.875" PointY="3" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_NATIONALITIES" Width="1.75" PointX="6.875" PointY="3" />
+        <EntityTypeShape EntityType="HermesDBModel.PARENTS" Width="2" PointX="0.5" PointY="3" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlCHILD_SELECTOR" Width="1.875" PointX="4.875" PointY="3" />
+        <EntityTypeShape EntityType="HermesDBModel.UPLOADS" Width="1.75" PointX="13.125" PointY="6.25" />
+        <EntityTypeShape EntityType="HermesDBModel.UPLOADS_FILES" Width="1.875" PointX="15.25" PointY="6.375" />
+        <AssociationConnector Association="HermesDBModel.FK_UPLOADS_FILES_UPLOADS" />
+        <EntityTypeShape EntityType="HermesDBModel.JOB_SECTORS" Width="1.625" PointX="15.375" PointY="4.75" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlPARENT_INFO" Width="2.125" PointX="8.125" PointY="4.875" />
+        <EntityTypeShape EntityType="HermesDBModel.NUMBERS" Width="1.5" PointX="17.5" PointY="7.75" />
+        <EntityTypeShape EntityType="HermesDBModel.SYS_YESNO" Width="1.5" PointX="17.5" PointY="9.5" />
+        <EntityTypeShape EntityType="HermesDBModel.gridPARENT_DATA" Width="2.125" PointX="2.625" PointY="14.125" />
+        <EntityTypeShape EntityType="HermesDBModel.gridAITISEIS_DATA" Width="1.875" PointX="0.5" PointY="10.25" />
+        <EntityTypeShape EntityType="HermesDBModel.gridSTATEMENT_DATA" Width="1.875" PointX="0.5" PointY="14.125" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlAPPLICANT_INFO" Width="1.875" PointX="15.25" PointY="9.25" />
+        <EntityTypeShape EntityType="HermesDBModel.gridUSER_PARENTS" Width="1.875" PointX="10.875" PointY="11.125" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlCHILDREN_DATA" Width="1.875" PointX="13.125" PointY="9.25" />
+        <EntityTypeShape EntityType="HermesDBModel.TAXISNET" Width="1.875" PointX="12" PointY="14.625" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlUSER_PARENT_SELECT" Width="2.125" PointX="17.5" PointY="11.25" />
+        <EntityTypeShape EntityType="HermesDBModel.FAMILY_INCOME" Width="1.875" PointX="16.5" PointY="13.5" />
+        <EntityTypeShape EntityType="HermesDBModel.mor_AITISI_DATA" Width="2.125" PointX="5.125" PointY="12.25" />
+        <EntityTypeShape EntityType="HermesDBModel.mor_AITISI_MORIA" Width="2" PointX="8.125" PointY="9.75" />
+        <EntityTypeShape EntityType="HermesDBModel.RANKINGS" Width="2" PointX="14.125" PointY="12.875" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlAITISEIS_LIST" Width="1.875" PointX="10.875" PointY="7" />
+        <EntityTypeShape EntityType="HermesDBModel.mor_CHILD_INFO" Width="1.875" PointX="14.125" PointY="14.5" />
+        <EntityTypeShape EntityType="HermesDBModel.AGE_CLASSES" Width="1.75" PointX="10" PointY="14.375" />
+        <EntityTypeShape EntityType="HermesDBModel.CHILDREN" Width="1.625" PointX="3" PointY="2.375" />
+        <AssociationConnector Association="HermesDBModel.FK_CHILDREN_PARENTS1" />
+        <EntityTypeShape EntityType="HermesDBModel.PROSKLISIS" Width="1.5" PointX="17.5" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.STATEMENTS" Width="2.125" PointX="5" PointY="5" />
+        <AssociationConnector Association="HermesDBModel.FK_STATEMENTS_PARENTS1" />
+        <EntityTypeShape EntityType="HermesDBModel.AITISIS" Width="1.75" PointX="3" PointY="5.5" />
+        <AssociationConnector Association="HermesDBModel.FK_AITISIS_PARENTS1" />
+        <EntityTypeShape EntityType="HermesDBModel.rep_AITISI_INFO_MORIA" Width="2.125" PointX="20" PointY="0.5" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlCHILDREN_POPULATOR" Width="2.125" PointX="7.5" PointY="14.375" />
+        <AssociationConnector Association="HermesDBModel.FK_AITISIS_CHILDREN" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlUPLOADED_FILES" Width="1.875" PointX="16.5" PointY="15.375" />
+        <EntityTypeShape EntityType="HermesDBModel.SUPPORT" Width="1.75" PointX="2.875" PointY="12" />
+        <EntityTypeShape EntityType="HermesDBModel.sqlPARENT_SELECTOR" Width="1.875" PointX="7.625" PointY="16.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

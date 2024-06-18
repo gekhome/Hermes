@@ -1,0 +1,169 @@
+﻿@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Μητρώο γονέων";
+    Layout = "~/Views/Shared/_StationLayout.cshtml";
+    string schoolYear = ViewData["schoolYearText"].ToString();
+    string protocol = ViewData["prosklisiProtocol"].ToString();
+    string displayInfo = schoolYear + ": " + protocol;       
+}
+
+@Html.AntiForgeryToken()
+<div class="row" style="margin:5px 30px 5px 30px; margin-top:10px">
+    <span style="margin:5px 30px 5px 30px">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">
+            @Html.Label("", "Μητρώο αιτούντων γονέων και αιτήσεις. Πρόσκληση  " + displayInfo, new { @style = "font-size:15px;font-style:normal" })
+        </font>
+    </span>
+    <span style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Station", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+    <button class="btn btn-info" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+    <span style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+        @Html.ActionLink("Εκτύπωση", "StationParentsPrint", "Station", null, new { @class = "btn btn-primary", style = "font-size:14px", target = "_blank" })
+    </span>
+</div>
+
+<div class="body-content" style="margin:10px 30px 5px 30px;font-size:small">
+    @(Html.Kendo().Grid<sqlParentGridViewModel>()
+        .Name("Master")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.FATHER_FULLNAME).Width(30);
+            columns.Bound(c => c.MOTHER_FULLNAME).Width(30);
+            columns.Bound(c => c.FATHER_PHONEHOME).Width(20);
+            columns.Bound(c => c.FATHER_PHONEMOBILE).Width(20);
+            columns.Bound(c => c.FATHER_PHONEWORK).Width(20);
+            columns.Bound(c => c.MOTHER_PHONEHOME).Width(20);
+            columns.Bound(c => c.MOTHER_PHONEMOBILE).Width(20);
+            columns.Bound(c => c.MOTHER_PHONEWORK).Width(20);
+            columns.Template(
+                @<text></text>)
+            .ClientTemplate(
+            "<a class=\"k-button k-button-icontext\" href='" + Url.Action("ParentsEdit", "Station") + "?parentsId=#=PARENTS_ID#' target = _blank><span class=\"k-icon k-edit\"></span>Καρτέλα</a>"
+            ).Width(15);
+        })
+            .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(10))
+            .Selectable()
+            .Filterable()
+            .HtmlAttributes(new { style = "display: block;font-size:12px" })
+            .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+            .Scrollable(scr => scr.Height(340))
+            .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(60)
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(p => p.PARENTS_ID);
+            })
+            .Read(read => read.Action("StationParents_Read", "Station"))
+            .Events(events => events.Error("error_handler1"))
+            )
+            .Events(events => events.Change("change"))
+    )
+</div>
+
+<div class="body-content" style="margin:10px 30px 5px 30px;font-size:small">
+
+        @(Html.Kendo().Grid<sqlAitisiGridViewModel>()
+        .Name("Child")
+        .AutoBind(false)
+        .HtmlAttributes(new { style = "display: block;font-size:13px" })
+        .Filterable()
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .Scrollable(scr => scr.Height(180))
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.FULLNAME).Width(40);
+            columns.Bound(c => c.BIRTHDATE).Width(20).Filterable(false);
+            columns.Bound(c => c.AGE).Width(16).Filterable(false);
+            columns.ForeignKey(f => f.AGE_CATEGORY, (IEnumerable<AGE_CLASSES>)ViewData["age_classes"], "CATEGORY_ID", "CATEGORY_TEXT").Width(24);
+            columns.ForeignKey(f => f.GENDER, (IEnumerable<SYS_GENDERS>)ViewData["genders"], "GENDER_ID", "GENDER").Width(18);
+            columns.Bound(c => c.PROTOCOL).Width(22);
+            columns.Bound(c => c.SY_TEXT).Width(20);
+            columns.Bound(c => c.AITISI_PROTOCOL).Width(20).Filterable(false);
+        })
+        .DataSource(ds => ds
+            .Ajax()
+            .Batch(false)
+            .PageSize(20)
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(p => p.AITISI_ID);
+            })
+            .Read(read => read.Action("ParentAitiseis_Read", "Station").Data("data"))
+            .Events(events => events.Error("error_handler2"))
+        )
+        )
+
+</div>
+
+<script type="text/javascript">
+
+    var options = null;
+
+    function RefreshGrid(e) {
+        var grid = $("#Master").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+    function change(e) {
+        var dataItem = this.dataItem(this.select());
+        var parentsID = dataItem.PARENTS_ID;
+
+        $("#Child").data("kendoGrid").dataSource.read({ parentsId: parentsID });
+        $("#Child").css("display", "block");
+    }
+
+    function data() {
+        var masterGrid = $("#Master").data("kendoGrid");
+        // get data item for selected row
+        var dataItem = masterGrid.dataItem(masterGrid.select());
+        if (dataItem) {
+            return { parentsId: dataItem.PARENTS_ID };
+        }
+        else {
+            return { parentsId: 0 };
+        }
+    }
+
+    function error_handler1(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        $("#Master").data("kendoGrid").dataSource.read();
+    }
+
+    function error_handler2(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        $("#Child").data("kendoGrid").dataSource.read();
+    }
+
+</script>
+

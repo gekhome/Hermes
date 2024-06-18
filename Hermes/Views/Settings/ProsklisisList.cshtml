@@ -1,0 +1,98 @@
+﻿@using Hermes.DAL;
+@using Hermes.Models;
+
+@{
+    ViewBag.Title = "Προσκλήσεις";
+    Layout = "~/Views/Shared/_StationLayout.cshtml";
+}
+
+<style>
+    .k-grid {
+        font-size: 13px;
+    }
+</style>
+
+@Html.AntiForgeryToken()
+<div class="page-header" style="margin:5px 30px 5px 30px">
+    <span style="margin:5px 30px 5px 30px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">Προβολή Προσκλήσεων</font>
+    </span>
+    <span style="margin:5px 10px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+        @Html.ActionLink("Επιστροφή", "Index", "Station", null, new { @class = "btn btn-warning", style = "font-size:14px" })
+    </span>
+    <button class="btn btn-success" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+</div>
+
+<div class="body-content" style="margin:10px 30px 5px 30px">
+        @(Html.Kendo().Grid<ProsklisisViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.ForeignKey(f => f.SCHOOL_YEAR, (IEnumerable<SYS_SCHOOLYEARS>)ViewData["SchoolYears"], "SY_ID", "SY_TEXT").Width(20);
+            columns.Bound(m => m.PROTOCOL).Width(40);
+            columns.Bound(m => m.DATE_START).Width(24).Filterable(false);
+            columns.Bound(m => m.DATE_END).Width(24).Filterable(false);
+            columns.Bound(m => m.HOUR_START).Width(20).Filterable(false);
+            columns.Bound(m => m.HOUR_END).Width(20).Filterable(false);
+            columns.ForeignKey(f => f.STATUS, (IEnumerable<PROSKLISIS_STATUS>)ViewData["Status"], "STATUS_ID", "STATUS").Width(20);
+            columns.Bound(m => m.ACTIVE).Width(16).ClientTemplate("<input type='checkbox' #= ACTIVE ? checked='checked' : '' # class='chkbx' ></input>").Filterable(false);
+        })
+        .HtmlAttributes(new { style = "font-size:14px" })
+        .Filterable()
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+        .Scrollable(scr => scr.Height(380))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(datasource => datasource
+        .Ajax()
+        .Batch(true)
+        .PageSize(40)
+        .ServerOperation(false)
+        .Model(model =>
+        {
+            model.Id(p => p.PROSKLISI_ID);
+            model.Field(p => p.SCHOOL_YEAR).DefaultValue(1);
+            model.Field(p => p.STATUS).DefaultValue(1);
+            model.Field(p => p.ACTIVE).DefaultValue(true);
+        })
+        .Read(read => read.Action("Prosklisis_Read", "Settings"))
+    ) @* datasource*@
+    )
+</div>
+
+<script id="checkbox-events" type="text/javascript">
+
+    // Date: 16-11-2018
+    // THIS IS IT! It works for any number of checkbox columns
+    // in batch editing mode of the grid.
+    // Solution link: https://stackoverflow.com/questions/17889049/adding-bindeable-checkbox-column-to-grid
+    $(function () {
+        $('#Grid').on('click', '.chkbx', function () {
+            var checked = $(this).is(':checked');
+            var grid = $('#Grid').data().kendoGrid;
+
+            grid.closeCell();
+            var dataItem = grid.dataItem($(this).closest('tr'));
+            var col = $(this).closest('td');
+
+            grid.editCell(col);
+            dataItem.set(grid.columns[col.index()].field, checked);
+            grid.closeCell(col);
+        });
+    });
+
+</script>
+
+
+<script type="text/javascript">
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+</script>
+
+

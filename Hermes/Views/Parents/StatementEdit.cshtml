@@ -1,0 +1,403 @@
+﻿@model Hermes.Models.StatementViewModel
+
+@{
+    ViewBag.Title = "Δήλωση στοιχείων γονέων";
+    Layout = "~/Views/Shared/_ParentLayout.cshtml";
+    string income_example = "12569,45";
+}
+
+<link href="@Url.Content("~/Content/mvcNotify.css")" rel="stylesheet" type="text/css" />
+<script src="@Url.Content("~/Scripts/mvcNotify.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    //Set autoclear of messages. Don't put this into $(document).ready.
+    //mvcNotify.autoClearTimeout = 0; //don't autoclear any types
+    mvcNotify.autoClearTimeout = 10000; //Unit of milliseconds. Requires mvcNotify.typesToAutoClear to be set to something (default behavior).
+    mvcNotify.typesToConsoleLog = "all"; //Log all types to console.
+</script>
+
+<head>
+    <title></title>
+    <style>
+        /*.control-label {
+            font-family: 'Segoe UI';
+            white-space: pre-line;
+            font-size: 14px
+        }*/
+        div.emphasis * {
+            color: #33B2FF;
+        }
+
+        .page-header {
+            margin-top:15px;
+            min-height:48px;
+            border-bottom: 2px solid #4F81BD;
+            font-family: 'Segoe UI';
+            font-size: x-large;
+        }
+
+        .k-textbox {
+            display: block;
+            width: 100%;
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+            transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+        }
+
+        .k-textbox:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        
+    <div class="page-header">
+        <div style="margin:5px 60px 5px 80px">
+            <span style="font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff;float:left">
+                <font style="color:#00008b;">Δήλωση στοιχείων γονέων</font>
+            </span>
+            <span style="margin:0px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+                @Html.ActionLink("Επιστροφή", "Index", "Parents", new { @class = "btn btn-warning", style = "font-size:14px" })
+            </span>
+            <span style="margin:0px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+                @Html.ActionLink("Εκτύπωση", "StatementPrint", "Parents", new { statementId = Model.STATEMENT_ID }, new { @class = "btn btn-primary", style = "font-size:14px", target = "_blank" })
+            </span>
+            <span style="margin:0px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">
+                <input id="buttonClientSide" style="font-family:'Segoe UI';font-size:14px" type="submit" value="Αποθήκευση" class="btn btn-success" />
+            </span>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        <fieldset>
+            <table class="col-md-12" style="border:solid;border-width:thin;margin:10px 30px 20px 30px">
+                <tr>
+                    <th style="background-color:#4682B4;padding-left:20px;padding-top:4px;padding-bottom:6px">
+                        <font style="font-family:'Segoe UI';font-size:medium;color:white;">Δήλωση στοιχείων γονέων</font>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="body-content" style="margin-top:10px">
+                            @(Html.Kendo().TabStrip()
+                            .Name("TabStrip")
+                            .Items(items =>
+                            {
+                            items.Add()
+                            .Text("Δήλωση γονέων (1)")
+                            .Selected(true)
+                            .ContentHtmlAttributes(new { style = "min-height: 500px" })
+                            .Content(@<text>
+                            <p></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Επώνυμο πατέρα:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control smartShortText" style="max-height:20px;width:300px; background-color:#EEE"
+                                               title="@Html.Raw(ViewBag.loggedParent.FATHER_LASTNAME)">@Html.Raw(ViewBag.loggedParent.FATHER_LASTNAME)</label>
+                                    </div>
+                                </div>
+                                    <div class="col-md-5">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Όνομα πατέρα:</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-control smartShortText" style="max-height:20px;width:300px; background-color:#EEE"
+                                                   title="@Html.Raw(ViewBag.loggedParent.FATHER_FIRSTNAME)">@Html.Raw(ViewBag.loggedParent.FATHER_FIRSTNAME)</label>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="col-md-4">
+                                        <label class="control-label">Επώνυμο μητέρας:</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-control smartShortText" style="max-height:20px;width:300px; background-color:#EEE"
+                                               title="@Html.Raw(ViewBag.loggedParent.MOTHER_LASTNAME)">@Html.Raw(ViewBag.loggedParent.MOTHER_LASTNAME)</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col-md-3">
+                                            <label class="control-label">Όνομα μητέρας:</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-control smartShortText" style="max-height:20px;width:300px; background-color:#EEE"
+                                                   title="@Html.Raw(ViewBag.loggedParent.MOTHER_FIRSTNAME)">@Html.Raw(ViewBag.loggedParent.MOTHER_FIRSTNAME)</label>
+                                            </div>
+                                    </div>
+                            </div>
+                            <div class="row emphasis" style="margin-left:180px;margin-top:5px;margin-bottom:10px">
+                                <label class="col-md-1" style="max-height:20px;width:640px;font-style:italic">
+                                Παράδειγμα καταχώρησης οικογενειακού εισοδήματος: @income_example (χωρίς διαχωριστικό χιλιάδων)
+                                </label>
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px;margin-top:0px">
+                                @Html.LabelFor(model => model.FATHER_JOBSECTOR, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @(Html.Kendo().DropDownListFor(model => model.FATHER_JOBSECTOR)
+                                .Name("FATHER_JOBSECTOR")
+                                .DataTextField("JOBSECTOR_TEXT")
+                                .DataValueField("JOBSECTOR_ID")
+                                .OptionLabel("Επιλογή...")
+                                .HtmlAttributes(new { style = "width:300px;" })
+                                .AutoBind(true)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetJobSectors", "Parents");
+                                    });
+                                })
+                                )
+                                @Html.ValidationMessageFor(model => model.FATHER_JOBSECTOR, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:5px">
+                                @Html.LabelFor(model => model.FATHER_AMA, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.FATHER_AMA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FATHER_AMA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px;margin-top:10px">
+                                @Html.LabelFor(model => model.MOTHER_JOBSECTOR, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @(Html.Kendo().DropDownListFor(model => model.MOTHER_JOBSECTOR)
+                                .Name("MOTHER_JOBSECTOR")
+                                .DataTextField("JOBSECTOR_TEXT")
+                                .DataValueField("JOBSECTOR_ID")
+                                .OptionLabel("Επιλογή...")
+                                .HtmlAttributes(new { style = "width:300px;" })
+                                .AutoBind(true)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetJobSectors", "Parents");
+                                    });
+                                })
+                                )
+                                @Html.ValidationMessageFor(model => model.MOTHER_JOBSECTOR, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:5px">
+                                @Html.LabelFor(model => model.MOTHER_AMA, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.MOTHER_AMA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MOTHER_AMA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:5px">
+                                @Html.LabelFor(model => model.FATHER_DELTIOANERGIA, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.FATHER_DELTIOANERGIA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FATHER_DELTIOANERGIA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:5px">
+                                @Html.LabelFor(model => model.MOTHER_DELTIOANERGIA, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.MOTHER_DELTIOANERGIA, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MOTHER_DELTIOANERGIA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:5px">
+                                @Html.LabelFor(model => model.INCOME_FAMILY, new { @class = "control-label col-md-3" })
+                                @Html.EditorFor(model => model.INCOME_FAMILY, new { htmlAttributes = new { @class = "form-control", style = "max-height:20px;width:120px" } })
+                                @Html.ValidationMessageFor(model => model.INCOME_FAMILY, "", new { @class = "text-danger" })
+                            </div>
+                            @*<div class="col-md-11" style="margin-bottom:10px;margin-top:5px">
+                                @Html.LabelFor(model => model.FAMILY_INCOME, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @(Html.Kendo().DropDownListFor(model => model.FAMILY_INCOME)
+                                .Name("FAMILY_INCOME")
+                                .DataTextField("INCOME_TEXT")
+                                .DataValueField("INCOME_ID")
+                                .OptionLabel("Επιλογή")
+                                .HtmlAttributes(new { style = "width:300px;" })
+                                .AutoBind(true)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetFamilyIncome", "Parents");
+                                    });
+                                })
+                                )
+                                @Html.ValidationMessageFor(model => model.FAMILY_INCOME, "", new { @class = "text-danger" })
+                            </div>*@
+                            <div class="col-md-11" style="margin-bottom:10px;margin-top:5px">
+                                @Html.LabelFor(model => model.FATHER_EPIDOMA, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @(Html.Kendo().DropDownListFor(model => model.FATHER_EPIDOMA)
+                                .Name("FATHER_EPIDOMA")
+                                .DataTextField("YESNO_TEXT")
+                                .DataValueField("YESNO_ID")
+                                .OptionLabel("Επιλογή")
+                                .HtmlAttributes(new { style = "width:120px;" })
+                                .AutoBind(true)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetYesNo", "Parents");
+                                    });
+                                })
+                                )
+                                @Html.ValidationMessageFor(model => model.FATHER_EPIDOMA, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-11" style="margin-bottom:10px;margin-top:2px">
+                                @Html.LabelFor(model => model.MOTHER_EPIDOMA, htmlAttributes: new { @class = "control-label col-md-3" })
+                                @(Html.Kendo().DropDownListFor(model => model.MOTHER_EPIDOMA)
+                                .Name("MOTHER_EPIDOMA")
+                                .DataTextField("YESNO_TEXT")
+                                .DataValueField("YESNO_ID")
+                                .OptionLabel("Επιλογή")
+                                .HtmlAttributes(new { style = "width:120px;" })
+                                .AutoBind(true)
+                                .DataSource(source =>
+                                {
+                                    source.Read(read =>
+                                    {
+                                        read.Action("GetYesNo", "Parents");
+                                    });
+                                })
+                                )
+                                @Html.ValidationMessageFor(model => model.MOTHER_EPIDOMA, "", new { @class = "text-danger" })
+                            </div>
+                            <p></p>
+                            </text>);
+                            items.Add()
+                            .Text("Δήλωση γονέων (2)")
+                            .ContentHtmlAttributes(new { style = "min-height: 420px" })
+                            .Content(@<text>
+                            <p></p>
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.DIKAIOYXOI_BOTH, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.DIKAIOYXOI_BOTH, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.DIKAIOYXOI_BOTH, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.FATHER_DISABILITY, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.FATHER_DISABILITY, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FATHER_DISABILITY, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.MOTHER_DISABILITY, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.MOTHER_DISABILITY, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MOTHER_DISABILITY, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.CHILD_AMEA, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.CHILD_AMEA, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CHILD_AMEA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.CHILD_ORPHAN, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.CHILD_ORPHAN, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CHILD_ORPHAN, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.PARENT_DIVORCED, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.PARENT_DIVORCED, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PARENT_DIVORCED, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.PARENT_INARMY, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.PARENT_INARMY, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PARENT_INARMY, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            @*<div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.RE_REGISTRATION, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.RE_REGISTRATION, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.RE_REGISTRATION, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+
+                            <div class="row" style="margin-left:20px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.SIBLING_IN_BNS, new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1">
+                                    @Html.EditorFor(model => model.SIBLING_IN_BNS, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.SIBLING_IN_BNS, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-left:20px;margin-top:5px">
+                                <div class="col-md-5" style="margin-bottom:5px;margin-top:10px">
+                                    @Html.LabelFor(model => model.CHILDREN_MINOR, htmlAttributes: new { @class = "control-label col-md-5", @style = "min-width:400px" })
+                                </div>
+                                <div class="col-md-1" style="margin-left:30px">
+                                    @(Html.Kendo().DropDownListFor(model => model.CHILDREN_MINOR)
+                                    .Name("CHILDREN_MINOR")
+                                    .DataTextField("NUMBER")
+                                    .DataValueField("NUMBER_ID")
+                                    .OptionLabel("...")
+                                    .HtmlAttributes(new { style = "width:60px;" })
+                                    .AutoBind(true)
+                                    .DataSource(source =>
+                                    {
+                                        source.Read(read =>
+                                        {
+                                            read.Action("GetNumbers", "Parents");
+                                        });
+                                    })
+                                    )
+                                    @Html.ValidationMessageFor(model => model.CHILDREN_MINOR, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <p></p>
+                            </text>);
+                            })
+                            )       @*--- End of Tabstrip ---*@
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
+
+}   @* ---  End of BeginForm ----------*@

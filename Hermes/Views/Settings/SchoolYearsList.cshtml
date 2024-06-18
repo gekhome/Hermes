@@ -1,0 +1,56 @@
+﻿@using Hermes.Models
+@model IEnumerable<Hermes.Models.SchoolYearsViewModel>
+
+@{
+    ViewBag.Title = "Σχολικά έτη";
+    Layout = "~/Views/Shared/_StationLayout.cshtml";
+}
+
+    @Html.AntiForgeryToken()
+    <div class="page-header" style="margin:5px 30px 5px 30px">
+        <span style="margin:5px 30px 5px 30px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+            <font style="color:#00008b;font-family:'Segoe UI'">Σχολικά Έτη</font>
+        </span>
+        <span style="margin:5px 10px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Station", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+        <button class="btn btn-success" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>
+    </div>
+
+    <div class="body-content" style="margin:10px 30px 5px 30px">
+        @(Html.Kendo().Grid<SchoolYearsViewModel>()
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(m => m.SY_TEXT).Width(30);
+            columns.Bound(m => m.SY_DATESTART).Width(30);
+            columns.Bound(m => m.SY_DATEEND).Width(30);
+            columns.Bound("").Width(2).Filterable(false);
+        })
+            .Filterable()
+            .HtmlAttributes(new { style = "font-size:14px" })
+            .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+            .Scrollable(scr => scr.Height(400))
+            .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+            .DataSource(datasource => datasource
+            .Ajax()
+            .PageSize(40)
+            .ServerOperation(false)
+            .Model(model =>
+            {
+                model.Id(p => p.SY_ID);
+            })
+            .Read(read => read.Action("SchoolYear_Read", "Settings"))
+        ) @* datasource*@
+        )
+    </div>
+
+<script type="text/javascript">
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+</script>

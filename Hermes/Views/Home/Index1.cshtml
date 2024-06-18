@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "Αρχική-Hermes";
+    string currentYear = DateTime.Today.Year.ToString();    
+}
+
+
+@section footer {
+<div class="body-content" style="margin:10px 30px 5px 30px;">
+    @*<hr style="background-color:#000080">*@
+    <table width:100%>
+        <tr>
+            <td width="5%" align="left"><img src="~/images/metro/oaed-logo.png" height="60" width="74" /></td>
+            <td align="center">
+                <font color="#000080" size="3" style="font-weight:600">Διεύθυνση Αρχικής Επαγγελματικής Εκπαίδευσης και Κατάρτισης</font>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" align="left"></td>
+            <td align="center">
+                <font color="#000080" size="2">Μελέτη-Ανάπτυξη: Δρ. Γεώργιος Κυριακάκης</font>
+            </td>
+        </tr>
+    </table>
+</div>
+}
+
+
+<style>
+    p.serif {
+        font-family: "Times New Roman", Times, serif;
+        font-size: medium;
+    }
+
+    p.sansserif {
+        font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+        font-size:14px;
+    }
+</style>
+
+<div class="row">
+    <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Καλώς ήλθατε</h1>
+    <label style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-size:16px;font-weight:normal">
+    Ηλεκτρονικές αιτήσεις εγγραφών παιδιών στους Β.Ν.Σ. - Ο.Α.Ε.Δ. (2020-@currentYear)
+    </label>
+
+    @(Html.Kendo().PanelBar()
+        .Name("IntroPanelBar")
+        .Items(items =>
+        {
+            items.Add()
+            .Text("Είσοδος")
+            .Selected(true)
+            .Expanded(true)
+            .Content(@<text>
+                <div id="page">
+                    <div class="suites">
+                        <div class="suite-column" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                            <img src="~/images/metro/blue-people.png" height="100" width="120" />
+                            @if (ViewBag.appTest == true)
+                            {
+                                @Html.ActionLink("Είσοδος δοκιμών", "Login2", "USER_ADMINS")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Είσοδος γονέων", "TaxisNetLogin", "USER_PARENTS")
+                            }
+                        </div>
+                        <div class="suite-column" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                            <img src="~/images/metro/kindergarten.png" height="112" width="112" />
+                            @Html.ActionLink("Είσοδος σταθμού", "Login", "USER_STATIONS")
+                        </div>
+                        <div class="suite-column" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                            <img src="~/images/metro/blue-admin3.png" height="112" width="100" />
+                            @Html.ActionLink("Είσοδος διαχειριστή", "Login", "USER_ADMINS")
+                        </div>
+                    </div>
+                </div>
+            </text>);
+
+            items.Add()
+            .Text("Μερικές χρήσιμες συμβουλές")
+            .Content(
+            @<text>
+                <!-- Tabtrip section -->
+                <div style="margin-left:6px;margin-right:6px">
+
+                    <p class="sansserif"></p>
+                    <p class="sansserif" style="font-size:medium">
+                        <span>
+                            <font style="font-family:'Segoe UI';font-size:16px">
+                                Τι κάνω για να υποβάλω την Ηλεκτρονική Αίτηση;
+                            </font>
+                        </span>
+                        <br />
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList1.png" />
+                        Κάνετε είσοδο στην εφαρμογή με τα στοιχεία σας του TAXISnet από το εικονίδιο 'Είσοδος γονέων'. Μετά την
+                        επιτυχή είσοδο εμφανίζεται η σελίδα εισόδου της Εφαρμογής αυτής.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList2.png" />
+                        Στη σελίδα εισόδου επιλέγετε αν το εμφανιζόμενο ΑΦΜ ανήκει στον 'Πατέρα' ή 'Μητέρα' του παιδιού για το οποίο
+                        γίνεται η αίτηση εγγραφής σε ΒΝΣ. Στη συνέχεια ανοίγει η σελίδα εργασιών για την υποβολή της ηλεκτρονικής αίτησης.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList3.png" />
+                        Επιλέγετε 'Ατομικά στοιχεία γονέων'. Στη φόρμα που ανοίγει συμπληρώνετε τα
+                        στοιχεία που ζητούνται. Πατάτε 'Αποθήκευση' και επιστρέφετε στην κεντρική
+                        σελίδα.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList4.png" />
+                        Επιλέγετε 'Καταχώρηση στοιχείων παιδιών'. Στη φόρμα που ανοίγει συμπληρώνετε τα
+                        στοιχεία που ζητούνται΄. Πατάτε 'Αποθήκευση' και μετά 'Επιστροφή' για να επιστρέψετε στη σελίδα εργασιών.
+                        σελίδα.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList5.png" />
+                        Αφού έχετε ορίσει ένα ή περισσότερα παιδιά, στο βήμα 4, επιλέγετε 'Υποβολή και διαχείριση αιτήσεων'.<br />
+                        Εδώ, ορίζετε σε ποιό βρεφονηπιακό σταθμο θέλετε εγγραφή των παιδιών σας.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList6.png" />
+                        Έπιλέγετε 'Δήλωση στοιχείων γονέων' και συμπληρώνετε τα στοιχεία που ζητούνται στην καρτέλα. Πατάτε
+                        'Επιστροφή' για να επιστρέψετε στη αρχική σελίδα.
+                    </p>
+                    <p class="sansserif">
+                        <img src="~/Images/metro/orderedList7.png" />
+                        Έπιλέγετε 'Μεταφόρτωση δικαιολογητικών' για να ανεβάσετε τα συνημμένα πιστοποιητικά της αίτησης.
+                        Αυτά πρέπει να έχουν σκαναριστεί σε μορφή PDF και να βρίσκονται όλα σε ένα φάκελο στον υπολογιστή σας.
+                    </p>
+                    <p />
+                    <p class="sansserif">
+                        ΣΗΜΑΝΤΙΚΗ ΔΙΕΥΚΡΙΝΙΣΗ
+                    </p>
+                    <p class="sansserif">
+                        <font style="font-weight:bold">
+                            Από την ημέρα που καταχωρήσετε την αίτησή σας και μέχρι την ημερομηνία λήξης
+                            της προθεσμίας υποβολής αιτήσεων, μπορείτε να κάνετε, όσες φορές θέλετε, αλλαγές
+                            στα καταχωρημένα στοιχεία και εκτυπώσεις. Συνεπώς, έχετε σχετική άνεση χρόνου για
+                            διορθώσεις και γενικά όποιες αλλαγές κρίνετε σκόπιμες.
+                        </font>
+                    </p>
+                    <p class="sansserif">
+                        <font style="font-weight:bold;font-style:italic">
+                            Όλες οι αιτήσεις θα κλειδωθούν το απόγευμα στις 24:00 μμ της ημερομηνίας λήξης υποβολής αιτήσεων.
+                        </font>
+                    </p>
+                </div>
+                <!-- End of Tabstrip -->
+            </text>);
+            items.Add()
+            .Text("Ανακοίνωση (24/06/2020)")
+            .Content(@<text>
+            <div style="margin-left:6px;margin-right:6px">
+                <p></p>
+                <p class="sansserif">
+                    <img src="~/Images/phone/appbar.card.1.png" width="42" height="42" />
+                    Η πρόσβαση στις Ηλεκτρονικές Υπηρεσίες του ΟΑΕΔ απαιτεί σύγχρονα προγράμματα πλοήγησης (browsers) για την ασφάλεια των προσωπικών
+                    δεδομένων και των πληροφοριακών συστημάτων. Αν αντιμετωπίζετε πρόβλημα πρόσβασης στις Ηλεκτρονικές Υπηρεσίες του ΟΑΕΔ, θα πρέπει 
+                    να κατεβάσετε και να εγκαταστήσετε την πιο πρόσφατη έκδοση ενός από τους δωρεάν περιηγητές Google Chrome ή Mozilla Firefox. 
+                    Για τον σκοπό αυτό επισκεφθείτε μια από τις παρακάτω ιστοσελίδες και ακολουθείστε τις οδηγίες που σας παρέχουν.<br />
+                    Για τον Google Chrome: <a href="https://www.google.com/chrome/browser/desktop" target="_blank"><b>https://www.google.com/chrome/browser/desktop</b></a><br />
+                    Για τον Mozilla Firefox: <a href="https://www.mozilla.org/el/firefox/new" target="_blank"><b>https://www.mozilla.org/el/firefox/new</b></a> 
+                </p>
+                <p class="sansserif">
+                    <img src="~/Images/phone/appbar.card.2.png" width="42" height="42" />
+                    Η τρέχουσα Πρόσκληση είναι ανοικτή για τους αιτούντες γονείς από 24/06/2020 ώρα 18:00 έως 08/07/2020 ώρα 24:00.<br />
+                </p>
+                <p></p>
+                <p class="sansserif">
+                    <img src="~/Images/phone/appbar.card.4.png" width="42" height="42" />
+                    Υποστήριξη αιτούντων γονέων (βλ. "Επικοινωνία")
+                    <ul>
+                        <li>
+                            Τα email μηνύματα που αποστέλλονται σε άλλη διεύθυνση εκτός της αναφερόμενης παραπάνω δεν θα απαντώνται.
+                        </li>
+                        <li>
+                            Email μηνύματα τα οποία είναι γραμμένα σε greeklish θα διαγράφονται χωρίς ανάγνωση και συνεπώς δεν θα απαντώνται.
+                        </li>
+                        <li>
+                            Τυχόν ερωτήματα μέσω email για να απαντηθούν απαιτούνται : Ονοματεπώνυμο, ΑΦΜ, Τηλέφωνα επικοινωνίας.
+                        </li>
+                    </ul>
+                </p>
+                </div>
+            </text>);
+        })
+    )
+</div>
+

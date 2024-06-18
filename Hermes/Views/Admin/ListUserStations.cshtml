@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Hermes.Models.UserStationViewModel>
+@using Hermes.DAL;
+
+
+@{
+    ViewBag.Title = "Λογαριασμοί Σταθμών";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="page-header" style="margin:5px 30px 5px 30px">
+    <span style="margin:5px 30px 5px 30px;font-family:'Segoe UI';font-size:large;text-shadow:1px 1px #0026ff">
+        <font style="color:#00008b;float:left;font-family:'Segoe UI'">Λογαριασμοί βρεφονηπιακών σταθμών</font>
+    </span>
+    <span style="margin:5px 10px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Επιστροφή", "Index", "Admin", null, new { @class = "btn btn-warning", style = "font-size:14px" })</span>
+    <button class="btn btn-info" style="margin:5px 5px 5px 5px;float:right;font-family:'Segoe UI';font-size:14px" onclick="RefreshGrid()">Ανανέωση</button>   
+    <span style="margin:5px 5px 5px 10px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Εκτύπωση", "StationAccountsPrint", "Admin", null, new { @class = "btn btn-primary", style = "font-size:14px", target = "_blank" })</span>
+    <span style="margin:5px 5px 5px 10px;float:right;font-family:'Segoe UI';font-size:14px">@Html.ActionLink("Αλλαγή κωδικών", "CreatePasswords", "Admin", null, new { @class = "btn btn-danger", style = "font-size:14px" })</span>
+</div>
+<div class="body-content" style="margin:10px 30px 5px 30px">
+    @(Html.Kendo().Grid(Model)
+        .Name("Grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.USERNAME).Groupable(false).Width(40);
+            columns.Bound(c => c.PASSWORD).Groupable(false).Width(36);
+            columns.ForeignKey(c => c.STATION_ID, (IEnumerable<SYS_STATIONS>)ViewData["stations"], "ΣΤΑΘΜΟΣ_ΚΩΔ", "ΕΠΩΝΥΜΙΑ").Groupable(false).Width(50);
+            columns.Bound(c => c.ISACTIVE).Width(20).ClientTemplate("<input type='checkbox' #= ISACTIVE ? checked='checked':'' # class='chkbx' />").Width(20);
+            columns.Command(command => command.Destroy().Text("Διαγραφή")).Width(32).Title("Εντολές");
+        })
+        .ToolBar(toolBar =>
+        {
+            toolBar.Create();
+            toolBar.Save();
+        })
+        .HtmlAttributes(new { style = "font-size:14px" })
+        .Editable(editable => editable.Mode(GridEditMode.InCell))
+        .Navigatable()
+        .Filterable()
+        .Sortable(sortable => sortable.AllowUnsort(true).SortMode(GridSortMode.MultipleColumn))
+        .Scrollable(scr => scr.Height(400))
+        .Pageable(pageable => pageable
+        .Refresh(true)
+        .PageSizes(true)
+        .ButtonCount(5))
+        .DataSource(datasource => datasource
+            .Ajax()
+            .Batch(true)
+            .PageSize(40)
+            .ServerOperation(false)
+            .Model(model => {
+                model.Id(p => p.USER_ID);
+                model.Field(p => p.STATION_ID).DefaultValue(ViewData["defaultStation"]);
+            })
+            .Create(create => create.Action("UserStation_Create", "Admin"))
+            .Read(read => read.Action("UserStation_Read", "Admin"))
+            .Update(update => update.Action("UserStation_Update", "Admin"))
+            .Destroy(destroy => destroy.Action("UserStation_Destroy", "Admin"))
+            .Events(events => events.Error("error_handler"))
+        )
+    )
+</div>
+
+<script type="text/javascript">
+
+    // Date: 16-11-2018
+    // Listener for the state of the three checkboxes (Π1, Π2, Π3).
+    // Required, otherwise changes do not take effect in batch mode of the grid.
+    // THIS IS IT! It works for any number of checkbox columns. All other solutions fail!
+    // in batch editing mode of the grid.
+    // Solution link: https://stackoverflow.com/questions/17889049/adding-bindeable-checkbox-column-to-grid
+    $(function () {
+        $('#Grid').on('click', '.chkbx', function () {
+            var checked = $(this).is(':checked');
+            var grid = $('#Grid').data().kendoGrid;
+
+            grid.closeCell();
+            var dataItem = grid.dataItem($(this).closest('tr'));
+            var col = $(this).closest('td');
+
+            grid.editCell(col);
+            dataItem.set(grid.columns[col.index()].field, checked);
+            grid.closeCell(col);
+        });
+    });
+
+    function RefreshGrid(e) {
+        var grid = $("#Grid").data("kendoGrid");
+        grid.dataSource.read();
+    }
+
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "<br/>";
+                    });
+                }
+            });
+            MessageBoxAlert(message, "Σφάλμα");
+        }
+        RefreshGrid(e);
+    }
+
+</script>
+
+
+
+
+
+
